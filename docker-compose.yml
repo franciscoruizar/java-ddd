@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  mysql:
+    container_name: database
+    image: mysql:8
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=lechuga
+    entrypoint:
+      sh -c "
+      echo 'CREATE DATABASE IF NOT EXISTS domain_events; CREATE DATABASE IF NOT EXISTS accounts;' > /docker-entrypoint-initdb.d/init.sql;
+      /usr/local/bin/docker-entrypoint.sh --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+      "
+    command: [ "--default-authentication-plugin=mysql_native_password" ]
+
+  java:
+    container_name: app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/app:delegated
+    env_file:
+      - .env
+    tty: true
+    depends_on:
+      - mysql

@@ -1,0 +1,11 @@
+rootProject.name = 'java-ddd-template'
+
+include ':accounts'
+project(':accounts').projectDir = new File('src/accounts')
+
+include ':cms'
+project(':cms').projectDir = new File('src/cms')
+
+include ':shared'
+project(':shared').projectDir = new File('src/shared')
+

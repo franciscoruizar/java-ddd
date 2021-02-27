@@ -1,0 +1,157 @@
+def packagesName = 'ar.franciscoruiz'
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'org.springframework.boot'
+
+    sourceCompatibility = 11
+    targetCompatibility = 11
+
+    group = packagesName
+    version = '1.0'
+
+    repositories {
+        mavenCentral()
+        maven { url 'https://repo.spring.io/milestone' }
+    }
+
+    ext {
+        set('springCloudVersion', "Hoxton.M3")
+    }
+
+    dependencies {
+        //Logs
+        implementation 'org.apache.logging.log4j:log4j-core:2.14.0'
+        implementation 'org.apache.logging.log4j:log4j-api:2.14.0'
+        implementation 'com.vlkan.log4j2:log4j2-logstash-layout:1.0.5'
+        implementation 'io.github.cdimascio:java-dotenv:5.2.2'
+
+        //ORM
+        implementation 'org.hibernate:hibernate-core:5.4.28.Final'
+        implementation 'org.apache.tomcat:tomcat-dbcp:10.0.2'
+        implementation 'com.sun.xml.bind:jaxb-impl:3.0.0'
+        implementation 'javax.xml.bind:jaxb-api:2.4.0-b180830.0359'
+
+        //Spring Libraries
+        implementation 'org.springframework:spring-orm:5.3.4'
+        implementation 'org.springframework:spring-context-support:5.3.4'
+        implementation 'org.springframework.boot:spring-boot-starter-amqp'
+        implementation 'org.springframework.boot:spring-boot-starter-mail'
+        implementation 'org.springframework.boot:spring-boot-starter-security'
+
+        //Others
+        implementation 'com.google.guava:guava:30.1-jre'
+        implementation 'org.reflections:reflections:0.9.12'
+
+        implementation 'io.jsonwebtoken:jjwt:0.9.1'
+        runtime 'mysql:mysql-connector-java:8.0.22'
+
+
+
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+        testImplementation 'org.mockito:mockito-core:3.7.0'
+        testImplementation 'com.github.javafaker:javafaker:1.0.2'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+
+    task view_paths {
+        doLast { task ->
+            println "$task.project.name"
+            println "------------------"
+            println "Main: $sourceSets.main.java.srcDirTrees"
+            println "   Resources: $sourceSets.main.resources.srcDirTrees"
+            println "Tests: $sourceSets.test.java.srcDirTrees"
+            println "   Resources: $sourceSets.test.resources.srcDirTrees"
+        }
+    }
+}
+
+// All subprojects (located in src/*)
+subprojects {
+    group = "${packagesName}.${rootProject.name}"
+
+    sourceSets {
+        main {
+            java { srcDirs = ['main'] }
+            resources { srcDirs = ['main/resources'] }
+        }
+
+        test {
+            java { srcDirs = ['test'] }
+            resources { srcDirs = ['test/resources'] }
+        }
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+
+        testImplementation rootProject.sourceSets.main.output
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+        if (project.name != "shared") {
+            implementation project(":shared")
+            testImplementation project(":shared").sourceSets.test.output
+        }
+    }
+
+    bootJar {
+        enabled = false
+    }
+
+    jar {
+        enabled = true
+    }
+}
+
+// Main project (located in apps/)
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:2.4.1"
+    }
+}
+
+sourceSets {
+    main {
+        java { srcDirs = ['apps/main'] }
+        resources { srcDirs = ['apps/main/resources'] }
+    }
+
+    test {
+        java { srcDirs = ['apps/test'] }
+        resources { srcDirs = ['apps/test/resources'] }
+    }
+}
+
+apply plugin: 'application'
+apply plugin: "org.springframework.boot"
+
+bootJar {
+    baseName 'template'
+    version '1.0'
+}
+
+mainClassName = "${packagesName}.apps.Starter"
+
+dependencies {
+
+    implementation 'junit:junit:4.12'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    implementation project(":accounts")
+    implementation project(":cms")
+    implementation project(":shared")
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation project(":shared").sourceSets.test.output
+}

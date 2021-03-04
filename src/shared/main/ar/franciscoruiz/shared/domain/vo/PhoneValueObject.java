@@ -9,7 +9,8 @@ public abstract class PhoneValueObject {
 
     public PhoneValueObject(String value) {
         this.value = value;
-        validate(value);
+        if (value != null)
+            validate(value);
     }
 
     public String value() {
@@ -38,8 +39,8 @@ public abstract class PhoneValueObject {
         return Objects.hash(value);
     }
 
-    private void validate(String value){
-        String regex = "^\\+(?:[0-9] ?){6,14}[0-9]$";
+    private void validate(String value) {
+        String regex = "^[+]\\d{2}[ ]\\d{2}-\\d{4}-\\d{4}$";
         if (!value.matches(regex))
             throw new DomainError("phone error", String.format("the phone <%s> is not valid", value));
     }

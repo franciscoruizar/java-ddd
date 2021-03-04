@@ -9,8 +9,8 @@ import io.github.cdimascio.dotenv.Dotenv;
 public final class EnvFileParameter implements Parameter {
     private final Dotenv dotenv;
 
-    public EnvFileParameter() {
-        this.dotenv = Dotenv.load();
+    public EnvFileParameter(Dotenv dotenv) {
+        this.dotenv = dotenv;
     }
 
     public String get(String key) throws ParameterNotExist {

@@ -8,5 +8,6 @@ public final class UserId extends Identifier {
     }
 
     private UserId() {
+        super(null);
     }
 }

@@ -1,6 +1,7 @@
 package ar.franciscoruiz.accounts.auth.infrastructure.persistence;
 
 import ar.franciscoruiz.accounts.auth.domain.AuthRepository;
+import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.auth.AuthUser;
 import ar.franciscoruiz.shared.domain.auth.AuthUsername;
 import ar.franciscoruiz.shared.domain.criteria.*;
@@ -11,8 +12,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public final class MySqlAuthRepository extends HibernateRepository<AuthUser> implements AuthRepository {
-    public MySqlAuthRepository(@Qualifier("accounts-session_factory") SessionFactory sessionFactory) {
+@Service
+public final class HibernateAuthRepository extends HibernateRepository<AuthUser> implements AuthRepository {
+    public HibernateAuthRepository(@Qualifier("accounts-session_factory") SessionFactory sessionFactory) {
         super(sessionFactory, AuthUser.class);
     }
 

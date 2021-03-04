@@ -1,8 +1,8 @@
 package ar.franciscoruiz.accounts.auth.application.authenticate;
 
 import ar.franciscoruiz.accounts.auth.AuthModuleUnitTestCase;
+import ar.franciscoruiz.accounts.auth.domain.AuthUserMother;
 import ar.franciscoruiz.shared.domain.auth.AuthUser;
-import ar.franciscoruiz.shared.domain.auth.AuthUserMother;
 import org.junit.jupiter.api.Test;
 
 final class AuthAuthenticationsUserAuthenticatorShould extends AuthModuleUnitTestCase {

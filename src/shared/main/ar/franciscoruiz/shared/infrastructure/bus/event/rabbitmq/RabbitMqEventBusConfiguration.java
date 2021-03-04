@@ -7,7 +7,6 @@ import ar.franciscoruiz.shared.infrastructure.bus.event.DomainEventsInformation;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
 import java.util.Collection;

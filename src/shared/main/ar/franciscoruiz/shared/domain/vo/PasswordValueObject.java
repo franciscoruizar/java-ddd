@@ -6,7 +6,7 @@ public abstract class PasswordValueObject extends StringValueObject {
     public PasswordValueObject(String value) {
         super(value);
 
-        if (value.isEmpty())
+        if (value != null && value.isEmpty())
             throw new DomainError("password empty", "please, complete the password");
     }
 }

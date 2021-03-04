@@ -6,4 +6,8 @@ public final class UserPhone extends PhoneValueObject {
     public UserPhone(String value) {
         super(value);
     }
+
+    private UserPhone() {
+        super(null);
+    }
 }

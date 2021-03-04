@@ -9,7 +9,8 @@ public abstract class UrlValueObject {
 
     public UrlValueObject(String value) {
         this.value = value;
-        validate(value);
+        if (value != null)
+            validate(value);
     }
 
     public String value() {
@@ -38,7 +39,7 @@ public abstract class UrlValueObject {
         return Objects.hash(value);
     }
 
-    private void validate(String value){
+    private void validate(String value) {
         String regex = "^((((http|https?|ftps?|gopher|telnet|nntp)://)|(mailto:|news:))(%[0-9A-Fa-f]{2}|[-()_.!~*';/?:@&=+$,A-Za-z0-9])+)([).!';/?:,][[:blank:]])?$";
         if (!value.matches(regex))
             throw new DomainError("url error", String.format("the url <%s> is not valid", value));

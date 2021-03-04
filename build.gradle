@@ -50,7 +50,6 @@ allprojects {
         runtime 'mysql:mysql-connector-java:8.0.22'
 
 
-
         testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
         testImplementation 'org.mockito:mockito-core:3.7.0'
         testImplementation 'com.github.javafaker:javafaker:1.0.2'

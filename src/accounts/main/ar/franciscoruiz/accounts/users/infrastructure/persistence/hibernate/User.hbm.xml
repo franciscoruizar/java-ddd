@@ -1,0 +1,57 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="ar.franciscoruiz.accounts.users.domain.User" table="users">
+        <composite-id name="id" class="ar.franciscoruiz.accounts.users.domain.UserId" access="field">
+            <key-property column="id" name="value" length="36" access="field"/>
+        </composite-id>
+
+        <component name="name" class="ar.franciscoruiz.accounts.users.domain.UserName" access="field">
+            <property name="value" column="name" type="java.lang.String" access="field"/>
+        </component>
+
+        <component name="lastname" class="ar.franciscoruiz.accounts.users.domain.UserLastname"
+                   access="field">
+            <property name="value" column="lastname" type="java.lang.String" access="field"/>
+        </component>
+
+        <component name="username" class="ar.franciscoruiz.accounts.users.domain.UserUsername"
+                   access="field">
+            <property name="value" column="username" type="java.lang.String" access="field"/>
+        </component>
+
+        <component name="email" class="ar.franciscoruiz.accounts.users.domain.UserEmail"
+                   access="field">
+            <property name="value" column="email" type="java.lang.String" access="field"/>
+        </component>
+
+        <component name="password" class="ar.franciscoruiz.accounts.users.domain.UserPassword"
+                   access="field">
+            <property name="value" column="password" type="java.lang.String" access="field"/>
+        </component>
+
+        <component name="profilePhotoUrl" class="ar.franciscoruiz.accounts.users.domain.UserProfilePhotoUrl"
+                   access="field">
+            <property name="value" column="profile_photo_url" type="java.lang.String" access="field"/>
+        </component>
+
+        <component name="phone" class="ar.franciscoruiz.accounts.users.domain.UserPhone"
+                   access="field">
+            <property name="value" column="phone" type="java.lang.String" access="field"/>
+        </component>
+
+        <component name="roleId" class="ar.franciscoruiz.accounts.roles.domain.RoleId"
+                   access="field">
+            <property name="value" column="role_id" type="java.lang.String" access="field"/>
+        </component>
+
+        <property name="createdDate" column="created_date" type="java.time.LocalDateTime" access="field"/>
+
+        <property name="updatedDate" column="updated_date" type="java.time.LocalDateTime" access="field"/>
+
+        <property name="deletedDate" column="deleted_date" type="java.time.LocalDateTime" access="field"/>
+    </class>
+</hibernate-mapping>

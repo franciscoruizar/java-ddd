@@ -1,13 +1,11 @@
 package ar.franciscoruiz.shared.infrastructure.spring;
 
-import ar.franciscoruiz.shared.domain.DomainError;
 import ar.franciscoruiz.shared.domain.bus.command.Command;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.command.CommandHandlerExecutionError;
 import ar.franciscoruiz.shared.domain.bus.query.Query;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
 import ar.franciscoruiz.shared.domain.bus.query.QueryHandlerExecutionError;
-import org.springframework.http.HttpStatus;
 
 import java.io.Serializable;
 import java.util.ArrayList;

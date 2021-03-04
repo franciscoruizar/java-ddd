@@ -1,6 +1,7 @@
-package ar.franciscoruiz.shared.domain.auth;
+package ar.franciscoruiz.accounts.auth.domain;
 
 import ar.franciscoruiz.shared.domain.WordMother;
+import ar.franciscoruiz.shared.domain.auth.Authorities;
 
 import java.util.ArrayList;
 import java.util.List;

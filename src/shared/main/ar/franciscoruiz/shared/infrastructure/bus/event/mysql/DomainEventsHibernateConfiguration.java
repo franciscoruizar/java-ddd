@@ -4,16 +4,14 @@ import ar.franciscoruiz.shared.domain.config.Parameter;
 import ar.franciscoruiz.shared.domain.config.ParameterNotExist;
 import ar.franciscoruiz.shared.infrastructure.hibernate.HibernateConfigurationFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.io.IOException;
 
-@Configuration
-@EnableTransactionManagement
+//@Configuration
+//@EnableTransactionManagement
 public class DomainEventsHibernateConfiguration {
     private final HibernateConfigurationFactory factory;
     private final Parameter                     config;

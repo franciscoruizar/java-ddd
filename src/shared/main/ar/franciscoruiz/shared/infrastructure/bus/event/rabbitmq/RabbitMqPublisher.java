@@ -1,6 +1,5 @@
 package ar.franciscoruiz.shared.infrastructure.bus.event.rabbitmq;
 
-import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.bus.event.DomainEvent;
 import ar.franciscoruiz.shared.infrastructure.bus.event.DomainEventJsonSerializer;
 import org.springframework.amqp.AmqpException;
@@ -21,9 +20,9 @@ public final class RabbitMqPublisher {
         Message message = new Message(
             serializedDomainEvent.getBytes(),
             MessagePropertiesBuilder.newInstance()
-                                    .setContentEncoding("utf-8")
-                                    .setContentType("application/json")
-                                    .build()
+                .setContentEncoding("utf-8")
+                .setContentType("application/json")
+                .build()
         );
 
         rabbitTemplate.send(exchangeName, domainEvent.eventName(), message);

@@ -6,4 +6,8 @@ public final class UserProfilePhotoUrl extends UrlValueObject {
     public UserProfilePhotoUrl(String value) {
         super(value);
     }
+
+    private UserProfilePhotoUrl() {
+        super(null);
+    }
 }

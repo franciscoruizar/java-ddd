@@ -9,7 +9,8 @@ public abstract class EmailValueObject {
 
     public EmailValueObject(String value) {
         this.value = value;
-        validate(value);
+        if (value != null)
+            validate(value);
     }
 
     public String value() {
@@ -38,7 +39,7 @@ public abstract class EmailValueObject {
         return Objects.hash(value);
     }
 
-    private void validate(String value){
+    private void validate(String value) {
         String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
         if (!value.matches(regex))
             throw new DomainError("email error", String.format("the email <%s> is not valid", value));

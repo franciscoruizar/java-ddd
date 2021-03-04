@@ -1,6 +1,5 @@
 package ar.franciscoruiz.shared.infrastructure.bus.event.rabbitmq;
 
-import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.Utils;
 import ar.franciscoruiz.shared.domain.bus.event.DomainEvent;
 import ar.franciscoruiz.shared.infrastructure.bus.event.DomainEventJsonDeserializer;
@@ -105,10 +104,10 @@ public final class RabbitMqDomainEventsConsumer {
 
         MessageBuilder.fromMessage(message).andProperties(
             MessagePropertiesBuilder.newInstance()
-                                    .setContentEncoding("utf-8")
-                                    .setContentType("application/json")
-                                    .copyHeaders(headers)
-                                    .build());
+                .setContentEncoding("utf-8")
+                .setContentType("application/json")
+                .copyHeaders(headers)
+                .build());
 
         publisher.publish(message, exchange, queue);
     }

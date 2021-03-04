@@ -6,4 +6,8 @@ public final class ModuleName extends StringValueObject {
     public ModuleName(String value) {
         super(value);
     }
+
+    private ModuleName() {
+        super(null);
+    }
 }

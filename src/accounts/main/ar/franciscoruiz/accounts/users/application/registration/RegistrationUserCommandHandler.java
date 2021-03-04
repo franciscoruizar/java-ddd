@@ -6,15 +6,15 @@ import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.bus.command.CommandHandler;
 
 @Service
-public final class RegisterUserCommandHandler implements CommandHandler<RegisterUserCommand> {
+public final class RegistrationUserCommandHandler implements CommandHandler<RegistrationUserCommand> {
     private final UserRegister creator;
 
-    public RegisterUserCommandHandler(UserRegister creator) {
+    public RegistrationUserCommandHandler(UserRegister creator) {
         this.creator = creator;
     }
 
     @Override
-    public void handle(RegisterUserCommand command) {
+    public void handle(RegistrationUserCommand command) {
         UserId              id              = new UserId(command.id());
         UserName            name            = new UserName(command.name());
         UserLastname        lastname        = new UserLastname(command.lastname());

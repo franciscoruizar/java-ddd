@@ -5,7 +5,7 @@ import ar.franciscoruiz.accounts.auth.domain.AuthUserMother;
 import ar.franciscoruiz.shared.domain.auth.AuthUser;
 import org.junit.jupiter.api.Test;
 
-final class AuthAuthenticationsUserAuthenticatorShould extends AuthModuleUnitTestCase {
+final class AuthUserAuthenticatorShould extends AuthModuleUnitTestCase {
     @Test
     void authenticate_a_valid_user() {
         AuthUserAuthenticator authenticator = new AuthUserAuthenticator(repository, encoder);

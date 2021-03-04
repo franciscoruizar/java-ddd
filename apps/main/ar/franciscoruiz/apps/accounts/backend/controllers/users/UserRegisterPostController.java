@@ -1,7 +1,7 @@
 package ar.franciscoruiz.apps.accounts.backend.controllers.users;
 
 import ar.franciscoruiz.accounts.roles.domain.Role;
-import ar.franciscoruiz.accounts.users.application.registration.RegisterUserCommand;
+import ar.franciscoruiz.accounts.users.application.registration.RegistrationUserCommand;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
 import ar.franciscoruiz.shared.infrastructure.spring.ApiController;
@@ -26,7 +26,7 @@ public final class UserRegisterPostController extends ApiController {
     public ResponseEntity<String> index(
         @RequestBody Request request
     ) {
-        this.dispatch(new RegisterUserCommand(
+        this.dispatch(new RegistrationUserCommand(
             request.id(),
             request.name(),
             request.lastname(),

@@ -4,7 +4,7 @@ import ar.franciscoruiz.shared.domain.bus.command.Command;
 
 import java.util.Objects;
 
-public final class RegisterUserCommand implements Command {
+public final class RegistrationUserCommand implements Command {
     private final String id;
     private final String name;
     private final String lastname;
@@ -15,7 +15,7 @@ public final class RegisterUserCommand implements Command {
     private final String phone;
     private final String roleId;
 
-    public RegisterUserCommand(
+    public RegistrationUserCommand(
         String id,
         String name,
         String lastname,
@@ -77,7 +77,7 @@ public final class RegisterUserCommand implements Command {
     public boolean equals(Object obj) {
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;
-        var that = (RegisterUserCommand) obj;
+        var that = (RegistrationUserCommand) obj;
         return Objects.equals(this.id, that.id) &&
             Objects.equals(this.name, that.name) &&
             Objects.equals(this.lastname, that.lastname) &&

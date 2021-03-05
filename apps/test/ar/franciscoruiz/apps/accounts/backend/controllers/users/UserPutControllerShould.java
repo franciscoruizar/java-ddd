@@ -3,7 +3,7 @@ package ar.franciscoruiz.apps.accounts.backend.controllers.users;
 import ar.franciscoruiz.apps.accounts.backend.AccountsApplicationTestCase;
 import org.junit.jupiter.api.Test;
 
-final class UserUpdaterPostControllerShould extends AccountsApplicationTestCase {
+final class UserPutControllerShould extends AccountsApplicationTestCase {
     @Test
     void should_update_a_exists_user() throws Exception {
         String body = "{\"id\": \"1aab45ba-3c7a-4344-8936-78466eca77fa\", " +

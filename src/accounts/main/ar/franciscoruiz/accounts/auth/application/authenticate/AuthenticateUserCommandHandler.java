@@ -15,9 +15,9 @@ public final class AuthenticateUserCommandHandler implements CommandHandler<Auth
 
     @Override
     public void handle(AuthenticateUserCommand command) {
-        AuthUsername email    = new AuthUsername(command.username());
+        AuthUsername username = new AuthUsername(command.username());
         AuthPassword password = new AuthPassword(command.password());
 
-        authenticator.authenticate(email, password);
+        authenticator.authenticate(username, password);
     }
 }

@@ -2,15 +2,15 @@ package ar.franciscoruiz.shared.infrastructure.spring;
 
 import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.auth.AuthUser;
+import ar.franciscoruiz.shared.domain.auth.AuthUsername;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Date;
 
 @Service
-public final class SpringJwtUtil {
+public final class JwtUtil {
     private static final String KEY = "w0dx";
 
     public String generateToken(AuthUser user) {
@@ -19,12 +19,12 @@ public final class SpringJwtUtil {
             .signWith(SignatureAlgorithm.HS256, KEY).compact();
     }
 
-    public boolean validateToken(String token, UserDetails user) {
-        return user.getUsername().equals(extractUsername(token)) && !isTokenExpired(token);
+    public boolean validateToken(String token, AuthUser user) {
+        return user.username().equals(extractUsername(token)) && !isTokenExpired(token);
     }
 
-    public String extractUsername(String token) {
-        return getClaims(token).getSubject();
+    public AuthUsername extractUsername(String token) {
+        return new AuthUsername(getClaims(token).getSubject());
     }
 
     public boolean isTokenExpired(String token) {

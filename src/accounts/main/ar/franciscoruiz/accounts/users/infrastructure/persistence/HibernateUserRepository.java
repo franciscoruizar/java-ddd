@@ -5,6 +5,7 @@ import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.criteria.*;
 import ar.franciscoruiz.shared.infrastructure.hibernate.HibernateRepository;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.Optional;
 
 @Service
 public final class HibernateUserRepository extends HibernateRepository<User> implements UserRepository {
-    public HibernateUserRepository(SessionFactory sessionFactory) {
+    public HibernateUserRepository(@Qualifier("accounts-session_factory") SessionFactory sessionFactory) {
         super(sessionFactory, User.class);
     }
 

@@ -7,15 +7,15 @@ import ar.franciscoruiz.shared.domain.criteria.Filters;
 import ar.franciscoruiz.shared.domain.criteria.Order;
 
 @Service
-public final class SearchUserByCriteriaQueryHandler implements QueryHandler<SearchUserByCriteriaQuery, UsersResponse> {
+public final class SearchUsersByCriteriaQueryHandler implements QueryHandler<SearchUsersByCriteriaQuery, UsersResponse> {
     private final UsersByCriteriaSearcher searcher;
 
-    public SearchUserByCriteriaQueryHandler(UsersByCriteriaSearcher searcher) {
+    public SearchUsersByCriteriaQueryHandler(UsersByCriteriaSearcher searcher) {
         this.searcher = searcher;
     }
 
     @Override
-    public UsersResponse handle(SearchUserByCriteriaQuery query) {
+    public UsersResponse handle(SearchUsersByCriteriaQuery query) {
         Filters filters = Filters.fromValues(query.filters());
         Order   order   = Order.fromValues(query.orderBy(), query.orderType());
 

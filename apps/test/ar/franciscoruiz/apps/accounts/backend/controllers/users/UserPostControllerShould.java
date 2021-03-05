@@ -3,7 +3,7 @@ package ar.franciscoruiz.apps.accounts.backend.controllers.users;
 import ar.franciscoruiz.apps.accounts.backend.AccountsApplicationTestCase;
 import org.junit.jupiter.api.Test;
 
-final class UserRegisterPostControllerShould extends AccountsApplicationTestCase {
+final class UserPostControllerShould extends AccountsApplicationTestCase {
     @Test
     void should_create_a_non_exists_user() throws Exception {
         assertRequestWithBody(

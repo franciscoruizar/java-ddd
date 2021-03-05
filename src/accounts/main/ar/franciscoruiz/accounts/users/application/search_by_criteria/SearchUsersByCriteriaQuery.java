@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
-public final class SearchUserByCriteriaQuery extends ByCriteriaQuery implements Query {
-    public SearchUserByCriteriaQuery(
+public final class SearchUsersByCriteriaQuery extends ByCriteriaQuery implements Query {
+    public SearchUsersByCriteriaQuery(
         List<HashMap<String, String>> filters,
         Optional<String> orderBy,
         Optional<String> orderType,

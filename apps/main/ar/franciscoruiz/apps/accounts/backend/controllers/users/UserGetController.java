@@ -17,10 +17,7 @@ import java.time.LocalDateTime;
 
 @RestController
 public final class UserGetController extends ApiController {
-    public UserGetController(
-        QueryBus queryBus,
-        CommandBus commandBus
-    ) {
+    public UserGetController(QueryBus queryBus, CommandBus commandBus) {
         super(queryBus, commandBus);
     }
 

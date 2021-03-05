@@ -47,6 +47,21 @@ public final class User {
         this.deletedDate     = deletedDate;
     }
 
+    private User() {
+        this.id              = null;
+        this.name            = null;
+        this.lastname        = null;
+        this.username        = null;
+        this.email           = null;
+        this.password        = null;
+        this.profilePhotoUrl = null;
+        this.phone           = null;
+        this.roleId          = null;
+        this.createdDate     = null;
+        this.updatedDate     = null;
+        this.deletedDate     = null;
+    }
+
     public UserId id() {
         return id;
     }

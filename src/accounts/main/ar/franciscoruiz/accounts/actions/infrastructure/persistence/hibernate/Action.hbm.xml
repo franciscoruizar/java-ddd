@@ -1,0 +1,20 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="ar.franciscoruiz.accounts.actions.domain.Action" table="actions">
+        <composite-id name="id" class="ar.franciscoruiz.accounts.actions.domain.ActionId" access="field">
+            <key-property column="id" name="value" length="36" access="field"/>
+        </composite-id>
+
+        <component name="name" class="ar.franciscoruiz.accounts.actions.domain.ActionName" access="field">
+            <property name="value" column="name" type="java.lang.String" access="field"/>
+        </component>
+
+        <component name="moduleId" class="ar.franciscoruiz.accounts.modules.domain.ModuleId" access="field">
+            <property name="value" column="module_id" type="java.lang.String" access="field"/>
+        </component>
+    </class>
+</hibernate-mapping>

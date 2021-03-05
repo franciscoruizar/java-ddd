@@ -1,8 +1,10 @@
 package ar.franciscoruiz.shared.domain.auth;
 
+import ar.franciscoruiz.shared.domain.bus.query.Response;
+
 import java.util.Objects;
 
-public final class AuthUser {
+public final class AuthUser implements Response {
     private final AuthUsername username;
     private final AuthPassword password;
     private final Authorities  authorities;

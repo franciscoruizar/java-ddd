@@ -1,7 +1,7 @@
 package ar.franciscoruiz.apps.accounts.backend.controllers.users;
 
 import ar.franciscoruiz.accounts.roles.domain.Role;
-import ar.franciscoruiz.accounts.users.application.update.UpdateUserCommand;
+import ar.franciscoruiz.accounts.users.application.registration.RegistrationUserCommand;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
 import ar.franciscoruiz.shared.infrastructure.spring.ApiController;
@@ -9,31 +9,27 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public final class UserUpdaterPostController extends ApiController {
-    public UserUpdaterPostController(
-        QueryBus queryBus,
-        CommandBus commandBus
-    ) {
+public final class UserPostController extends ApiController {
+    public UserPostController(QueryBus queryBus, CommandBus commandBus) {
         super(queryBus, commandBus);
     }
 
-    @PutMapping("/api/users/{id}")
+    @PostMapping("/api/users")
     public ResponseEntity<String> index(
-        @RequestParam String id,
         @RequestBody Request request
     ) {
-        this.dispatch(new UpdateUserCommand(
-            id,
+        this.dispatch(new RegistrationUserCommand(
+            request.id(),
             request.name(),
             request.lastname(),
             request.username(),
             request.email(),
+            request.password(),
             request.profilePhotoUrl(),
             request.phone(),
             Role.valueOf(request.role()).value().value()
@@ -44,13 +40,23 @@ public final class UserUpdaterPostController extends ApiController {
 
     @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     static class Request {
+        private String id;
         private String name;
         private String lastname;
         private String username;
         private String email;
+        private String password;
         private String profilePhotoUrl;
         private String phone;
         private String role;
+
+        public String id() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
 
         public String name() {
             return name;
@@ -82,6 +88,14 @@ public final class UserUpdaterPostController extends ApiController {
 
         public void setEmail(String email) {
             this.email = email;
+        }
+
+        public String password() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
         }
 
         public String profilePhotoUrl() {

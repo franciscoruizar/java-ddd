@@ -1,4 +1,4 @@
-package ar.franciscoruiz.shared.infrastructure.spring;
+package ar.franciscoruiz.shared.infrastructure.encoder;
 
 import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.encoder.PasswordEncoder;

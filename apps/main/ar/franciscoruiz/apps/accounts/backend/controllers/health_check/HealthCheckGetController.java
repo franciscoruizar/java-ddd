@@ -1,8 +1,8 @@
 package ar.franciscoruiz.apps.accounts.backend.controllers.health_check;
 
+import ar.franciscoruiz.apps.shared.ApiController;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
-import ar.franciscoruiz.shared.infrastructure.spring.ApiController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,7 +18,7 @@ public final class HealthCheckGetController extends ApiController {
         super(queryBus, commandBus);
     }
 
-    @GetMapping("/health-check")
+    @GetMapping("/api/health-check")
     public HashMap<String, Serializable> index() {
         HashMap<String, Serializable> status = new HashMap<>();
         status.put("application", "accounts_backend");

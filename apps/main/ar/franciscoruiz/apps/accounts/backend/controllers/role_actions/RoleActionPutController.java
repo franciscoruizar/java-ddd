@@ -1,9 +1,9 @@
 package ar.franciscoruiz.apps.accounts.backend.controllers.role_actions;
 
 import ar.franciscoruiz.accounts.role_actions.application.create.CreateRoleActionCommand;
+import ar.franciscoruiz.apps.shared.ApiController;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
-import ar.franciscoruiz.shared.infrastructure.spring.ApiController;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import org.springframework.http.HttpStatus;

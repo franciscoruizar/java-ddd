@@ -21,6 +21,15 @@ public enum Role {
         throw new DomainError("role_not_exists", String.format("the role <%s> not exists", roleId.value()));
     }
 
+    public static Role find(RoleId roleId) {
+        for (var item : Role.values()) {
+            if (item.value().equals(roleId))
+                return item;
+        }
+
+        throw new DomainError("role_not_exists", String.format("the role <%s> not exists", roleId.value()));
+    }
+
     public RoleId value() {
         return new RoleId(value);
     }

@@ -1,4 +1,4 @@
-package ar.franciscoruiz.shared.infrastructure.spring;
+package ar.franciscoruiz.apps.shared.middlewares;
 
 import ar.franciscoruiz.shared.domain.DomainError;
 import io.jsonwebtoken.ExpiredJwtException;

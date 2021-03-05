@@ -19,6 +19,20 @@ public final class UserResponse implements Response {
     private final LocalDateTime deletedDate;
     private final Boolean       isActive;
 
+    private UserResponse() {
+        this.id              = null;
+        this.fullname        = null;
+        this.username        = null;
+        this.email           = null;
+        this.profilePhotoUrl = null;
+        this.phone           = null;
+        this.role            = null;
+        this.createdDate     = null;
+        this.updatedDate     = null;
+        this.deletedDate     = null;
+        this.isActive        = null;
+    }
+
     public UserResponse(
         String id,
         String fullname,
@@ -57,7 +71,7 @@ public final class UserResponse implements Response {
             user.createdDate(),
             user.updatedDate(),
             user.deletedDate(),
-            user.deletedDate() != null
+            user.deletedDate() == null
         );
     }
 

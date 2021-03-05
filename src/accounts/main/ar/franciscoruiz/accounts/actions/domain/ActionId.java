@@ -8,6 +8,6 @@ public final class ActionId extends Identifier {
     }
 
     private ActionId() {
-        super(null);
+        super();
     }
 }

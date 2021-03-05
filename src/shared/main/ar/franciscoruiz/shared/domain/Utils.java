@@ -1,7 +1,12 @@
 package ar.franciscoruiz.shared.domain;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
 import com.google.common.base.CaseFormat;
 
 import java.io.IOException;
@@ -12,28 +17,50 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 public final class Utils {
-    public static String dateToString(LocalDateTime dateTime) {
-        return dateTime.format(DateTimeFormatter.ISO_LOCAL_DATE);
+    private static ObjectMapper instance() {
+        return new ObjectMapper()
+            .findAndRegisterModules()
+            .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+            .setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE)
+            .setVisibility(VisibilityChecker.Std.defaultInstance()
+                .withFieldVisibility(JsonAutoDetect.Visibility.ANY));
     }
 
-    public static String dateToString(Timestamp timestamp) {
-        return dateToString(timestamp.toLocalDateTime());
-    }
-
-    public static String jsonEncode(HashMap<String, Serializable> map) {
+    public static <T> String jsonEncode(T map) {
         try {
-            return new ObjectMapper().writeValueAsString(map);
+            return instance().writeValueAsString(map);
         } catch (JsonProcessingException e) {
             return "";
         }
     }
 
-    public static HashMap<String, Serializable> jsonDecode(String body) {
+    public static <T> T jsonDecode(String body, Class<T> aggregateClass) {
         try {
-            return new ObjectMapper().readValue(body, HashMap.class);
+            return instance().readValue(body, aggregateClass);
         } catch (IOException e) {
             return null;
         }
+    }
+
+    public static HashMap<String, Serializable> jsonDecode(String body) {
+        try {
+            return instance().readValue(body, HashMap.class);
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    public static String dateToString(LocalDateTime dateTime) {
+        if (null == dateTime)
+            return null;
+        return dateTime.format(DateTimeFormatter.ISO_LOCAL_DATE);
+    }
+
+    public static String dateToString(Timestamp timestamp) {
+        if (null == timestamp)
+            return null;
+        return dateToString(timestamp.toLocalDateTime());
     }
 
     public static String toSnake(String text) {

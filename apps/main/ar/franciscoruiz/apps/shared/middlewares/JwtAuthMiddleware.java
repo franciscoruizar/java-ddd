@@ -1,25 +1,18 @@
-package ar.franciscoruiz.apps.accounts.backend.middleware;
+package ar.franciscoruiz.apps.shared.middlewares;
 
-import ar.franciscoruiz.accounts.auth.application.find_by_username.FindAuthUserByUsernameQuery;
-import ar.franciscoruiz.accounts.auth.domain.InvalidAuthCredentials;
-import ar.franciscoruiz.accounts.auth.domain.InvalidAuthUsername;
-import ar.franciscoruiz.shared.domain.auth.AuthUser;
-import ar.franciscoruiz.shared.domain.bus.command.CommandHandlerExecutionError;
-import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
-import ar.franciscoruiz.shared.infrastructure.spring.JwtUtil;
+import ar.franciscoruiz.apps.shared.utils.JwtUtil;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 public final class JwtAuthMiddleware implements Filter {
-    private final JwtUtil  jwtUtil;
-    private final QueryBus bus;
+    private final JwtUtil jwtUtil;
 
-    public JwtAuthMiddleware(JwtUtil jwtUtil, QueryBus bus) {
+    public JwtAuthMiddleware(JwtUtil jwtUtil) {
         this.jwtUtil = jwtUtil;
-        this.bus     = bus;
     }
 
     @Override
@@ -39,24 +32,22 @@ public final class JwtAuthMiddleware implements Filter {
         ServletRequest request,
         ServletResponse response
     ) throws IOException, ServletException {
-        String jwt      = authorizationHeader.substring(7);
-        String username = jwtUtil.extractUsername(jwt).value();
+        String token  = authorizationHeader.substring(7);
+        Map    claims = jwtUtil.claims(token);
 
-        if (username == null) {
+        if (validate(token, claims)) {
             setInvalidToken(response);
+        } else {
+            request.setAttribute("authentication_id", claims.get("id"));
+            request.setAttribute("authentication_username", claims.get("username"));
+            request.setAttribute("authentication_role", claims.get("role"));
+
+            chain.doFilter(request, response);
         }
+    }
 
-        try {
-            AuthUser user = bus.ask(new FindAuthUserByUsernameQuery(username));
-
-            request.setAttribute("authentication_username", user);
-
-            if (jwtUtil.validateToken(jwt, user)) {
-                chain.doFilter(request, response);
-            }
-        } catch (InvalidAuthUsername | InvalidAuthCredentials | CommandHandlerExecutionError error) {
-            setInvalidToken(response);
-        }
+    private boolean validate(String token, Map claims) {
+        return token.equals("") || jwtUtil.isTokenExpired(token) || claims == null || !(Boolean) claims.get("is_active");
     }
 
     private boolean hasIntroducedJwt(String authorizationHeader) {

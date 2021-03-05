@@ -2,9 +2,9 @@ package ar.franciscoruiz.apps.accounts.backend.controllers.users;
 
 import ar.franciscoruiz.accounts.roles.domain.Role;
 import ar.franciscoruiz.accounts.users.application.registration.RegistrationUserCommand;
+import ar.franciscoruiz.apps.shared.ApiController;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
-import ar.franciscoruiz.shared.infrastructure.spring.ApiController;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import org.springframework.http.HttpStatus;

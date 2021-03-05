@@ -1,13 +1,13 @@
 package ar.franciscoruiz.apps.accounts.backend.controllers.auth;
 
 import ar.franciscoruiz.accounts.auth.application.authenticate.AuthenticateUserCommand;
-import ar.franciscoruiz.accounts.auth.application.find_by_username.FindAuthUserByUsernameQuery;
-import ar.franciscoruiz.shared.domain.auth.AuthUser;
+import ar.franciscoruiz.accounts.users.application.UserResponse;
+import ar.franciscoruiz.accounts.users.application.find_by_username.FindUserByUsernameQuery;
+import ar.franciscoruiz.apps.shared.ApiController;
+import ar.franciscoruiz.apps.shared.utils.JwtUtil;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.command.CommandHandlerExecutionError;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
-import ar.franciscoruiz.shared.infrastructure.spring.ApiController;
-import ar.franciscoruiz.shared.infrastructure.spring.JwtUtil;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,7 +32,7 @@ public final class AuthenticationPostController extends ApiController {
     ) throws CommandHandlerExecutionError {
         dispatch(new AuthenticateUserCommand(request.username(), request.password()));
 
-        AuthUser user = ask(new FindAuthUserByUsernameQuery(request.username()));
+        UserResponse user = ask(new FindUserByUsernameQuery(request.username()));
 
         String jwt = jwtUtil.generateToken(user);
 

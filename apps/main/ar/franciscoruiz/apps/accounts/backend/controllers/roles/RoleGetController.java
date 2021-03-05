@@ -1,7 +1,7 @@
-package ar.franciscoruiz.apps.accounts.backend.controllers.modules;
+package ar.franciscoruiz.apps.accounts.backend.controllers.roles;
 
-import ar.franciscoruiz.accounts.modules.application.ModuleResponse;
-import ar.franciscoruiz.accounts.modules.application.find.FindModuleQuery;
+import ar.franciscoruiz.accounts.roles.domain.Role;
+import ar.franciscoruiz.accounts.roles.domain.RoleId;
 import ar.franciscoruiz.apps.shared.ApiController;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
@@ -15,18 +15,17 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 @RestController
-public final class ModuleGetController extends ApiController {
-    public ModuleGetController(QueryBus queryBus, CommandBus commandBus) {
+public final class RoleGetController extends ApiController {
+    public RoleGetController(QueryBus queryBus, CommandBus commandBus) {
         super(queryBus, commandBus);
     }
 
-    @GetMapping(value = "/api/modules/{id}")
+    @GetMapping(value = "/api/roles/{id}")
     public ResponseEntity<HashMap<String, Serializable>> index(@PathVariable String id) throws QueryHandlerExecutionError {
-        ModuleResponse module = ask(new FindModuleQuery(id));
-
-        return ResponseEntity.ok().body(new HashMap<String, Serializable>() {{
-            put("id", module.id());
-            put("name", module.name());
+        var role = Role.find(new RoleId(id));
+        return ResponseEntity.ok().body(new HashMap<>() {{
+            put("id", role.value().value());
+            put("name", role.name());
         }});
     }
 }

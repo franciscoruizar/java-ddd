@@ -1,14 +1,11 @@
 package ar.franciscoruiz.apps.accounts.backend.controllers.modules;
 
-import ar.franciscoruiz.accounts.modules.application.ModuleResponse;
 import ar.franciscoruiz.accounts.modules.application.ModulesResponse;
 import ar.franciscoruiz.accounts.modules.application.search_by_criteria.SearchModulesByCriteriaQuery;
+import ar.franciscoruiz.apps.shared.ApiController;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
 import ar.franciscoruiz.shared.domain.bus.query.QueryHandlerExecutionError;
-import ar.franciscoruiz.shared.infrastructure.spring.ApiController;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
@@ -25,8 +22,8 @@ public final class ModulesGetController extends ApiController {
     }
 
     @GetMapping("/api/modules")
-    public List<Response> index(@RequestParam HashMap<String, Serializable> params) throws QueryHandlerExecutionError {
-        ModulesResponse users = ask(
+    public List<HashMap<String, Serializable>> index(@RequestParam HashMap<String, Serializable> params) throws QueryHandlerExecutionError {
+        ModulesResponse modules = ask(
             new SearchModulesByCriteriaQuery(
                 parseFilters(params),
                 Optional.ofNullable((String) params.get("order_by")),
@@ -36,37 +33,10 @@ public final class ModulesGetController extends ApiController {
             )
         );
 
-        return users.values().stream().map(Response::parse).collect(Collectors.toList());
-    }
-
-    @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-    static class Response {
-        private String id;
-        private String name;
-
-        public Response(String id, String name) {
-            this.id   = id;
-            this.name = name;
-        }
-
-        public static Response parse(ModuleResponse module) {
-            return new Response(module.id(), module.name());
-        }
-
-        public String id() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public String name() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
+        return modules.values().stream().map(module -> new HashMap<String, Serializable>() {{
+                put("id", module.id());
+                put("name", module.name());
+            }}
+        ).collect(Collectors.toList());
     }
 }

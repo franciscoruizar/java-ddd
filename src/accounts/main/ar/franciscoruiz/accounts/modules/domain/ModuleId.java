@@ -8,6 +8,6 @@ public final class ModuleId extends Identifier {
     }
 
     private ModuleId() {
-        super(null);
+        super();
     }
 }

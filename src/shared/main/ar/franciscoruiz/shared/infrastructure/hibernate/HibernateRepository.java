@@ -3,11 +3,13 @@ package ar.franciscoruiz.shared.infrastructure.hibernate;
 import ar.franciscoruiz.shared.domain.Identifier;
 import ar.franciscoruiz.shared.domain.criteria.Criteria;
 import org.hibernate.SessionFactory;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 public abstract class HibernateRepository<T> {
     protected final SessionFactory             sessionFactory;
     protected final Class<T>                   aggregateClass;

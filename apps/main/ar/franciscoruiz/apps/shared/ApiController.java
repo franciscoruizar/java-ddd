@@ -1,4 +1,4 @@
-package ar.franciscoruiz.shared.infrastructure.spring;
+package ar.franciscoruiz.apps.shared;
 
 import ar.franciscoruiz.shared.domain.bus.command.Command;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;

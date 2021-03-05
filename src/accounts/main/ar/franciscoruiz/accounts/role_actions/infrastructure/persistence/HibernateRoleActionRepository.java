@@ -8,6 +8,7 @@ import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.infrastructure.hibernate.HibernateRepository;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.NativeQuery;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.List;
@@ -34,11 +35,8 @@ public final class HibernateRoleActionRepository extends HibernateRepository<Rol
 
     @Override
     public List<RoleAction> searchByRoleId(RoleId roleId) {
-        NativeQuery query = sessionFactory.getCurrentSession().createSQLQuery(
-            "SELECT role_id, action_id FROM role_actions WHERE role_id=':roleId'"
-        );
-
-        query.setParameter("roleId", roleId.value());
+        String sql   = String.format("SELECT role_id, action_id FROM role_actions WHERE role_id='%s'", roleId.value());
+        Query  query = sessionFactory.getCurrentSession().createNativeQuery(sql);
 
         List<Object[]> results = query.list();
 

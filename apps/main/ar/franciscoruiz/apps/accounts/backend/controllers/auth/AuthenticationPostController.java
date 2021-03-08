@@ -8,8 +8,6 @@ import ar.franciscoruiz.apps.shared.utils.JwtUtil;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.command.CommandHandlerExecutionError;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,7 +39,6 @@ public final class AuthenticationPostController extends ApiController {
         }};
     }
 
-    @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     static class Request {
         private String username;
         private String password;

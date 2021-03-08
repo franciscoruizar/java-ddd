@@ -2,12 +2,12 @@ package ar.franciscoruiz.accounts.modules.domain;
 
 import ar.franciscoruiz.shared.domain.vo.StringValueObject;
 
-public final class ModuleName extends StringValueObject {
-    public ModuleName(String value) {
+public final class ModuleEndpoint extends StringValueObject {
+    public ModuleEndpoint(String value) {
         super(value);
     }
 
-    private ModuleName() {
+    private ModuleEndpoint() {
         super(null);
     }
 }

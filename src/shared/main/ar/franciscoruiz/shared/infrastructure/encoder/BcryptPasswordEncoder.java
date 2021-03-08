@@ -5,7 +5,7 @@ import ar.franciscoruiz.shared.domain.encoder.PasswordEncoder;
 import org.mindrot.jbcrypt.BCrypt;
 
 @Service
-public final class BycriptPasswordEncoder implements PasswordEncoder {
+public final class BcryptPasswordEncoder implements PasswordEncoder {
 
     @Override
     public String encode(String rawPassword) {

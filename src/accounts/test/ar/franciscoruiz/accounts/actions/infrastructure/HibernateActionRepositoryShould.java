@@ -4,6 +4,9 @@ import ar.franciscoruiz.accounts.actions.ActionsModuleInfrastructureTestCase;
 import ar.franciscoruiz.accounts.actions.domain.Action;
 import ar.franciscoruiz.accounts.actions.domain.ActionIdMother;
 import ar.franciscoruiz.accounts.actions.domain.ActionMother;
+import ar.franciscoruiz.shared.domain.criteria.Criteria;
+import ar.franciscoruiz.shared.domain.criteria.Filters;
+import ar.franciscoruiz.shared.domain.criteria.Order;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -41,9 +44,11 @@ final class HibernateActionRepositoryShould extends ActionsModuleInfrastructureT
         Random       random   = new Random();
         int          total    = random.nextInt(5);
         List<Action> entities = new ArrayList<>();
-        for (int i = 0; i < total; i++)
-             entities.add(ActionMother.random());
-
+        var          modules  = moduleRepository.search(new Criteria(Filters.none(), Order.none())).subList(0, total);
+        for (int i = 0; i < total; i++) {
+            var action = ActionMother.random();
+            entities.add(ActionMother.create(action.id(), action.name(), modules.get(i).id()));
+        }
         return entities;
     }
 }

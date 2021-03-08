@@ -5,19 +5,19 @@ import ar.franciscoruiz.shared.domain.bus.query.Response;
 
 public final class ActionResponse implements Response {
     private final String id;
-    private final String name;
+    private final String method;
     private final String moduleId;
 
-    public ActionResponse(String id, String name, String moduleId) {
+    public ActionResponse(String id, String method, String moduleId) {
         this.id       = id;
-        this.name     = name;
+        this.method   = method;
         this.moduleId = moduleId;
     }
 
     public static ActionResponse fromAggregate(Action action) {
         return new ActionResponse(
             action.id().value(),
-            action.name().value(),
+            action.method().value(),
             action.moduleId().value()
         );
     }
@@ -26,8 +26,8 @@ public final class ActionResponse implements Response {
         return id;
     }
 
-    public String name() {
-        return name;
+    public String method() {
+        return method;
     }
 
     public String moduleId() {

@@ -1,5 +1,6 @@
 package ar.franciscoruiz.apps.shared;
 
+import ar.franciscoruiz.shared.domain.Utils;
 import ar.franciscoruiz.shared.domain.bus.command.Command;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.command.CommandHandlerExecutionError;
@@ -47,5 +48,9 @@ public abstract class ApiController {
         }
 
         return filters;
+    }
+
+    protected <T> HashMap<String, Object> encode(T map) {
+        return Utils.mapEncode(map);
     }
 }

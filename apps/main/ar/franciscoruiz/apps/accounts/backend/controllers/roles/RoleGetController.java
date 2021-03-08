@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.Serializable;
 import java.util.HashMap;
 
 @RestController
@@ -21,11 +20,9 @@ public final class RoleGetController extends ApiController {
     }
 
     @GetMapping(value = "/api/roles/{id}")
-    public ResponseEntity<HashMap<String, Serializable>> index(@PathVariable String id) throws QueryHandlerExecutionError {
-        var role = Role.find(new RoleId(id));
-        return ResponseEntity.ok().body(new HashMap<>() {{
-            put("id", role.value().value());
-            put("name", role.name());
-        }});
+    public ResponseEntity<HashMap<String, Object>> index(@PathVariable String id) throws QueryHandlerExecutionError {
+        Role role = Role.find(new RoleId(id));
+
+        return ResponseEntity.ok().body(encode(role));
     }
 }

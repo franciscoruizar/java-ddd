@@ -1,7 +1,7 @@
 package ar.franciscoruiz.accounts.actions.application.create;
 
 import ar.franciscoruiz.accounts.actions.domain.ActionId;
-import ar.franciscoruiz.accounts.actions.domain.ActionName;
+import ar.franciscoruiz.accounts.actions.domain.ActionMethod;
 import ar.franciscoruiz.accounts.modules.domain.ModuleId;
 import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.bus.command.CommandHandler;
@@ -16,10 +16,10 @@ public final class CreateActionCommandHandler implements CommandHandler<CreateAc
 
     @Override
     public void handle(CreateActionCommand command) {
-        ActionId   id       = new ActionId(command.id());
-        ActionName name     = new ActionName(command.name());
-        ModuleId   moduleId = new ModuleId(command.moduleId());
+        ActionId     id       = new ActionId(command.id());
+        ActionMethod method   = new ActionMethod(command.method());
+        ModuleId     moduleId = new ModuleId(command.moduleId());
 
-        this.creator.create(id, name, moduleId);
+        this.creator.create(id, method, moduleId);
     }
 }

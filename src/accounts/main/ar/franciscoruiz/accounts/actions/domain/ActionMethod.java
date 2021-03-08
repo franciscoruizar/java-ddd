@@ -2,12 +2,12 @@ package ar.franciscoruiz.accounts.actions.domain;
 
 import ar.franciscoruiz.shared.domain.vo.StringValueObject;
 
-public final class ActionName extends StringValueObject {
-    public ActionName(String value) {
+public final class ActionMethod extends StringValueObject {
+    public ActionMethod(String value) {
         super(value);
     }
 
-    private ActionName() {
+    private ActionMethod() {
         super(null);
     }
 }

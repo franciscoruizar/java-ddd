@@ -27,6 +27,15 @@ public final class Utils {
                 .withFieldVisibility(JsonAutoDetect.Visibility.ANY));
     }
 
+    public static <T> HashMap mapEncode(T map) {
+        try {
+            var instance = instance();
+            return instance.readValue(instance.writeValueAsString(map), HashMap.class);
+        } catch (JsonProcessingException e) {
+            return new HashMap();
+        }
+    }
+
     public static <T> String jsonEncode(T map) {
         try {
             return instance().writeValueAsString(map);

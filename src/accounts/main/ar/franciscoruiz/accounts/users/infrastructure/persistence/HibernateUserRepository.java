@@ -51,6 +51,6 @@ public final class HibernateUserRepository extends HibernateRepository<User> imp
 
     @Override
     public Optional<User> findById(UserId id) {
-        return Optional.empty();
+        return byId(id);
     }
 }

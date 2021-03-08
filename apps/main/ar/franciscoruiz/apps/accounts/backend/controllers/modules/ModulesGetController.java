@@ -22,7 +22,7 @@ public final class ModulesGetController extends ApiController {
     }
 
     @GetMapping("/api/modules")
-    public List<HashMap<String, Serializable>> index(@RequestParam HashMap<String, Serializable> params) throws QueryHandlerExecutionError {
+    public List<HashMap<String, Object>> index(@RequestParam HashMap<String, Serializable> params) throws QueryHandlerExecutionError {
         ModulesResponse modules = ask(
             new SearchModulesByCriteriaQuery(
                 parseFilters(params),
@@ -33,10 +33,6 @@ public final class ModulesGetController extends ApiController {
             )
         );
 
-        return modules.values().stream().map(module -> new HashMap<String, Serializable>() {{
-                put("id", module.id());
-                put("name", module.name());
-            }}
-        ).collect(Collectors.toList());
+        return modules.values().stream().map(this::encode).collect(Collectors.toList());
     }
 }

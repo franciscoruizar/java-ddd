@@ -4,13 +4,11 @@ import ar.franciscoruiz.accounts.modules.application.create.CreateModuleCommand;
 import ar.franciscoruiz.apps.shared.ApiController;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -20,25 +18,21 @@ public final class ModulePutController extends ApiController {
     }
 
     @PutMapping("/api/modules/{id}")
-    public ResponseEntity<String> index(
-        @RequestParam String id,
-        @RequestBody Request request
-    ) {
-        this.dispatch(new CreateModuleCommand(id, request.name()));
+    public ResponseEntity<String> index(@PathVariable String id, @RequestBody Request request) {
+        this.dispatch(new CreateModuleCommand(id, request.endpoint()));
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     static class Request {
-        private String name;
+        private String endpoint;
 
-        public String name() {
-            return name;
+        public String endpoint() {
+            return endpoint;
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public void setModule(String endpoint) {
+            this.endpoint = endpoint;
         }
     }
 }

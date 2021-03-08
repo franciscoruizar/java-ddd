@@ -26,8 +26,16 @@ public final class JwtUtil {
         return claims(token).getExpiration().before(new Date());
     }
 
-    public Claims claims(String token) {
+    public boolean validate(String token, UserResponse user) {
+        return !isTokenExpired(token) && user.username().equals(extractUsername(token)) && user.isActive();
+    }
+
+    private Claims claims(String token) {
         return Jwts.parser().setSigningKey(KEY).parseClaimsJws(token).getBody();
+    }
+
+    public String extractUsername(String token) {
+        return (String) claims(token).get("username");
     }
 
     private HashMap<String, Object> parseClaims(UserResponse user) {

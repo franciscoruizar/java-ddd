@@ -5,19 +5,19 @@ import ar.franciscoruiz.accounts.modules.domain.ModuleId;
 import java.util.Objects;
 
 public final class Action {
-    private final ActionId   id;
-    private final ActionName name;
-    private final ModuleId   moduleId;
+    private final ActionId     id;
+    private final ActionMethod method;
+    private final ModuleId     moduleId;
 
-    public Action(ActionId id, ActionName name, ModuleId moduleId) {
+    public Action(ActionId id, ActionMethod method, ModuleId moduleId) {
         this.id       = id;
-        this.name     = name;
+        this.method   = method;
         this.moduleId = moduleId;
     }
 
     private Action() {
         this.id       = null;
-        this.name     = null;
+        this.method   = null;
         this.moduleId = null;
     }
 
@@ -25,8 +25,8 @@ public final class Action {
         return id;
     }
 
-    public ActionName name() {
-        return name;
+    public ActionMethod method() {
+        return method;
     }
 
     public ModuleId moduleId() {
@@ -38,11 +38,11 @@ public final class Action {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Action action = (Action) o;
-        return Objects.equals(id, action.id) && Objects.equals(name, action.name) && Objects.equals(moduleId, action.moduleId);
+        return Objects.equals(id, action.id) && Objects.equals(method, action.method) && Objects.equals(moduleId, action.moduleId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, moduleId);
+        return Objects.hash(id, method, moduleId);
     }
 }

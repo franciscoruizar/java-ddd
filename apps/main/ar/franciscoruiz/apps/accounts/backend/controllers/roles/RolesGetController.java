@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -24,8 +23,9 @@ public final class RolesGetController extends ApiController {
     }
 
     @GetMapping("/api/roles")
-    public List<HashMap<String, Serializable>> index() throws QueryHandlerExecutionError {
-        return Arrays.stream(Role.values()).map(role -> new HashMap<String, Serializable>() {{
+    public List<HashMap<String, Object>> index() throws QueryHandlerExecutionError {
+
+        return Arrays.stream(Role.values()).map(role -> new HashMap<String, Object>() {{
             put("id", role.value().value());
             put("name", role.name());
         }}).collect(Collectors.toList());

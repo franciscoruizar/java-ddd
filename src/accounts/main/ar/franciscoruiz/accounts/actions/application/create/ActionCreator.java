@@ -2,7 +2,7 @@ package ar.franciscoruiz.accounts.actions.application.create;
 
 import ar.franciscoruiz.accounts.actions.domain.Action;
 import ar.franciscoruiz.accounts.actions.domain.ActionId;
-import ar.franciscoruiz.accounts.actions.domain.ActionName;
+import ar.franciscoruiz.accounts.actions.domain.ActionMethod;
 import ar.franciscoruiz.accounts.actions.domain.ActionRepository;
 import ar.franciscoruiz.accounts.modules.domain.ModuleDomainFinder;
 import ar.franciscoruiz.accounts.modules.domain.ModuleId;
@@ -19,7 +19,7 @@ public final class ActionCreator {
         this.moduleFinder = new ModuleDomainFinder(moduleRepository);
     }
 
-    public void create(ActionId id, ActionName name, ModuleId moduleId) {
+    public void create(ActionId id, ActionMethod name, ModuleId moduleId) {
         Action action = new Action(id, name, moduleId);
 
         ensureModule(moduleId);

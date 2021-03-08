@@ -4,13 +4,13 @@ import ar.franciscoruiz.accounts.users.UsersModuleInfrastructureTestCase;
 import ar.franciscoruiz.accounts.users.domain.User;
 import ar.franciscoruiz.accounts.users.domain.UserIdMother;
 import ar.franciscoruiz.accounts.users.domain.UserMother;
+import ar.franciscoruiz.accounts.users.domain.UserNotExist;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 
 @Transactional
@@ -25,11 +25,10 @@ final class HibernateUserRepositoryShould extends UsersModuleInfrastructureTestC
 
     @Test
     void return_an_existing() {
-        for (var item : entities()) {
-            repository.save(item);
-
-            Assertions.assertEquals(Optional.of(item), repository.findById(item.id()));
-        }
+        User item = entities().get(0);
+        repository.save(item);
+        User user = repository.findById(item.id()).orElseThrow(() -> new UserNotExist(item.id()));
+        Assertions.assertEquals(user, item);
     }
 
     @Test

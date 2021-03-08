@@ -2,11 +2,10 @@ package ar.franciscoruiz.apps.accounts.backend.controllers.users;
 
 import ar.franciscoruiz.accounts.roles.domain.Role;
 import ar.franciscoruiz.accounts.users.application.registration.RegistrationUserCommand;
+import ar.franciscoruiz.apps.accounts.backend.controllers.users.dto.UserRequest;
 import ar.franciscoruiz.apps.shared.ApiController;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +20,7 @@ public final class UserPostController extends ApiController {
 
     @PostMapping("/api/users")
     public ResponseEntity<String> index(
-        @RequestBody Request request
+        @RequestBody UserRequest request
     ) {
         this.dispatch(new RegistrationUserCommand(
             request.id(),
@@ -36,90 +35,5 @@ public final class UserPostController extends ApiController {
         ));
 
         return new ResponseEntity<>(HttpStatus.CREATED);
-    }
-
-    @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-    static class Request {
-        private String id;
-        private String name;
-        private String lastname;
-        private String username;
-        private String email;
-        private String password;
-        private String profilePhotoUrl;
-        private String phone;
-        private String role;
-
-        public String id() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public String name() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String lastname() {
-            return lastname;
-        }
-
-        public void setLastname(String lastname) {
-            this.lastname = lastname;
-        }
-
-        public String username() {
-            return username;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
-
-        public String email() {
-            return email;
-        }
-
-        public void setEmail(String email) {
-            this.email = email;
-        }
-
-        public String password() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-        public String profilePhotoUrl() {
-            return profilePhotoUrl;
-        }
-
-        public void setProfilePhotoUrl(String profilePhotoUrl) {
-            this.profilePhotoUrl = profilePhotoUrl;
-        }
-
-        public String phone() {
-            return phone;
-        }
-
-        public void setPhone(String phone) {
-            this.phone = phone;
-        }
-
-        public String role() {
-            return role;
-        }
-
-        public void setRole(String role) {
-            this.role = role;
-        }
     }
 }

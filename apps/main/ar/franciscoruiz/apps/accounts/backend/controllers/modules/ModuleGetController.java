@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.Serializable;
 import java.util.HashMap;
 
 @RestController
@@ -21,12 +20,9 @@ public final class ModuleGetController extends ApiController {
     }
 
     @GetMapping(value = "/api/modules/{id}")
-    public ResponseEntity<HashMap<String, Serializable>> index(@PathVariable String id) throws QueryHandlerExecutionError {
+    public ResponseEntity<HashMap<String, Object>> index(@PathVariable String id) throws QueryHandlerExecutionError {
         ModuleResponse module = ask(new FindModuleQuery(id));
 
-        return ResponseEntity.ok().body(new HashMap<String, Serializable>() {{
-            put("id", module.id());
-            put("name", module.name());
-        }});
+        return ResponseEntity.ok().body(encode(module));
     }
 }

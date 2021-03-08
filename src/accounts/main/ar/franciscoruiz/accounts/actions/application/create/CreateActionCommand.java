@@ -4,12 +4,12 @@ import ar.franciscoruiz.shared.domain.bus.command.Command;
 
 public final class CreateActionCommand implements Command {
     private final String id;
-    private final String name;
+    private final String method;
     private final String moduleId;
 
-    public CreateActionCommand(String id, String name, String moduleId) {
+    public CreateActionCommand(String id, String method, String moduleId) {
         this.id       = id;
-        this.name     = name;
+        this.method   = method;
         this.moduleId = moduleId;
     }
 
@@ -17,8 +17,8 @@ public final class CreateActionCommand implements Command {
         return id;
     }
 
-    public String name() {
-        return name;
+    public String method() {
+        return method;
     }
 
     public String moduleId() {

@@ -24,22 +24,22 @@ public final class ActionPutController extends ApiController {
         @RequestParam String id,
         @RequestBody Request request
     ) {
-        this.dispatch(new CreateActionCommand(id, request.name(), request.moduleId()));
+        this.dispatch(new CreateActionCommand(id, request.method(), request.moduleId()));
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     static class Request {
-        private String name;
+        private String method;
         private String moduleId;
 
-        public String name() {
-            return name;
+        public String method() {
+            return method;
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public void setMethod(String method) {
+            this.method = method;
         }
 
         public String moduleId() {

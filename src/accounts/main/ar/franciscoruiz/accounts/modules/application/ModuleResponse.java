@@ -5,17 +5,17 @@ import ar.franciscoruiz.shared.domain.bus.query.Response;
 
 public final class ModuleResponse implements Response {
     private final String id;
-    private final String name;
+    private final String endpoint;
 
-    public ModuleResponse(String id, String name) {
-        this.id   = id;
-        this.name = name;
+    public ModuleResponse(String id, String endpoint) {
+        this.id       = id;
+        this.endpoint = endpoint;
     }
 
     public static ModuleResponse fromAggregate(Module module) {
         return new ModuleResponse(
             module.id().value(),
-            module.name().value()
+            module.endpoint().value()
         );
     }
 
@@ -23,7 +23,7 @@ public final class ModuleResponse implements Response {
         return id;
     }
 
-    public String name() {
-        return name;
+    public String endpoint() {
+        return endpoint;
     }
 }

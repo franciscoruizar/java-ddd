@@ -6,6 +6,7 @@ import ar.franciscoruiz.apps.shared.ApiController;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
 import ar.franciscoruiz.shared.domain.bus.query.QueryHandlerExecutionError;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
@@ -22,7 +23,7 @@ public final class ActionsGetController extends ApiController {
     }
 
     @GetMapping("/api/actions")
-    public List<HashMap<String, Serializable>> index(@RequestParam HashMap<String, Serializable> params) throws QueryHandlerExecutionError {
+    public ResponseEntity<List<HashMap<String, Object>>> index(@RequestParam HashMap<String, Serializable> params) throws QueryHandlerExecutionError {
         ActionsResponse actions = ask(
             new SearchActionsByCriteriaQuery(
                 parseFilters(params),
@@ -33,11 +34,6 @@ public final class ActionsGetController extends ApiController {
             )
         );
 
-        return actions.values().stream().map(action -> new HashMap<String, Serializable>() {{
-                put("id", action.id());
-                put("name", action.name());
-                put("module_id", action.moduleId());
-            }}
-        ).collect(Collectors.toList());
+        return ResponseEntity.ok(actions.values().stream().map(this::encode).collect(Collectors.toList()));
     }
 }

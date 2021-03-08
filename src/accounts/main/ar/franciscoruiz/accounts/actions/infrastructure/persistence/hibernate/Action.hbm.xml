@@ -9,8 +9,8 @@
             <key-property column="id" name="value" length="36" access="field"/>
         </composite-id>
 
-        <component name="name" class="ar.franciscoruiz.accounts.actions.domain.ActionName" access="field">
-            <property name="value" column="name" type="java.lang.String" access="field"/>
+        <component name="method" class="ar.franciscoruiz.accounts.actions.domain.ActionMethod" access="field">
+            <property name="value" column="method" type="java.lang.String" access="field"/>
         </component>
 
         <component name="moduleId" class="ar.franciscoruiz.accounts.modules.domain.ModuleId" access="field">

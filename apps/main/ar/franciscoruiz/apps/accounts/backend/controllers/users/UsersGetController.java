@@ -3,7 +3,6 @@ package ar.franciscoruiz.apps.accounts.backend.controllers.users;
 import ar.franciscoruiz.accounts.users.application.UsersResponse;
 import ar.franciscoruiz.accounts.users.application.search_by_criteria.SearchUsersByCriteriaQuery;
 import ar.franciscoruiz.apps.shared.ApiController;
-import ar.franciscoruiz.shared.domain.Utils;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
 import ar.franciscoruiz.shared.domain.bus.query.QueryHandlerExecutionError;
@@ -23,7 +22,7 @@ public final class UsersGetController extends ApiController {
     }
 
     @GetMapping("/api/users")
-    public List<HashMap<String, Serializable>> index(@RequestParam HashMap<String, Serializable> params) throws QueryHandlerExecutionError {
+    public List<HashMap<String, Object>> index(@RequestParam HashMap<String, Serializable> params) throws QueryHandlerExecutionError {
         UsersResponse users = ask(
             new SearchUsersByCriteriaQuery(
                 parseFilters(params),
@@ -34,18 +33,6 @@ public final class UsersGetController extends ApiController {
             )
         );
 
-        return users.values().stream().map(user -> new HashMap<String, Serializable>() {{
-            put("id", user.id());
-            put("fullname", user.fullname());
-            put("username", user.username());
-            put("email", user.email());
-            put("profile_photo_url", user.profilePhotoUrl());
-            put("phone", user.phone());
-            put("role", user.role());
-            put("created_date", Utils.dateToString(user.createdDate()));
-            put("updated_date", Utils.dateToString(user.updatedDate()));
-            put("deleted_date", Utils.dateToString(user.deletedDate()));
-            put("is_active", user.isActive());
-        }}).collect(Collectors.toList());
+        return users.values().stream().map(this::encode).collect(Collectors.toList());
     }
 }

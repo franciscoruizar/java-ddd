@@ -1,6 +1,5 @@
 package ar.franciscoruiz.accounts.users.application;
 
-import ar.franciscoruiz.accounts.roles.domain.Role;
 import ar.franciscoruiz.accounts.users.domain.User;
 import ar.franciscoruiz.shared.domain.bus.query.Response;
 
@@ -13,7 +12,7 @@ public final class UserResponse implements Response {
     private final String        email;
     private final String        profilePhotoUrl;
     private final String        phone;
-    private final String        role;
+    private final String        roleId;
     private final LocalDateTime createdDate;
     private final LocalDateTime updatedDate;
     private final LocalDateTime deletedDate;
@@ -26,7 +25,7 @@ public final class UserResponse implements Response {
         this.email           = null;
         this.profilePhotoUrl = null;
         this.phone           = null;
-        this.role            = null;
+        this.roleId          = null;
         this.createdDate     = null;
         this.updatedDate     = null;
         this.deletedDate     = null;
@@ -40,7 +39,7 @@ public final class UserResponse implements Response {
         String email,
         String profilePhotoUrl,
         String phone,
-        String role,
+        String roleId,
         LocalDateTime createdDate,
         LocalDateTime updatedDate,
         LocalDateTime deletedDate,
@@ -52,7 +51,7 @@ public final class UserResponse implements Response {
         this.email           = email;
         this.profilePhotoUrl = profilePhotoUrl;
         this.phone           = phone;
-        this.role            = role;
+        this.roleId          = roleId;
         this.createdDate     = createdDate;
         this.updatedDate     = updatedDate;
         this.deletedDate     = deletedDate;
@@ -67,7 +66,7 @@ public final class UserResponse implements Response {
             user.email().value(),
             user.profilePhotoUrl().value(),
             user.phone().value(),
-            Role.valueOf(user.roleId()),
+            user.roleId().value(),
             user.createdDate(),
             user.updatedDate(),
             user.deletedDate(),
@@ -99,8 +98,8 @@ public final class UserResponse implements Response {
         return phone;
     }
 
-    public String role() {
-        return role;
+    public String roleId() {
+        return roleId;
     }
 
     public LocalDateTime createdDate() {

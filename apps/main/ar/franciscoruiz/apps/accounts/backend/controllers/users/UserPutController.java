@@ -1,6 +1,5 @@
 package ar.franciscoruiz.apps.accounts.backend.controllers.users;
 
-import ar.franciscoruiz.accounts.roles.domain.Role;
 import ar.franciscoruiz.accounts.users.application.update.UpdateUserCommand;
 import ar.franciscoruiz.apps.accounts.backend.controllers.users.dto.UserRequest;
 import ar.franciscoruiz.apps.shared.ApiController;
@@ -32,7 +31,7 @@ public final class UserPutController extends ApiController {
             request.email(),
             request.profilePhotoUrl(),
             request.phone(),
-            Role.valueOf(request.role()).value().value()
+            request.roleId()
         ));
 
         return new ResponseEntity<>(HttpStatus.CREATED);

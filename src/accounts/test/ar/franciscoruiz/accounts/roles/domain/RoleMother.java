@@ -1,11 +1,11 @@
 package ar.franciscoruiz.accounts.roles.domain;
 
-import java.util.Random;
-
 public final class RoleMother {
+    public static Role create(RoleId id, RoleName name) {
+        return new Role(id, name);
+    }
+
     public static Role random() {
-        var values = Role.values();
-        var item   = new Random().nextInt(Role.values().length - 1);
-        return values[item];
+        return create(RoleIdMother.random(), RoleNameMother.random());
     }
 }

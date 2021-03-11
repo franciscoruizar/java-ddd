@@ -41,13 +41,13 @@ final class HibernateActionRepositoryShould extends ActionsModuleInfrastructureT
     }
 
     private List<Action> entities() {
-        Random       random   = new Random();
-        int          total    = random.nextInt(5);
-        List<Action> entities = new ArrayList<>();
-        var          modules  = moduleRepository.search(new Criteria(Filters.none(), Order.none())).subList(0, total);
+        var random   = new Random();
+        var total    = random.nextInt(5);
+        var entities = new ArrayList<Action>();
+        var modules  = moduleRepository.search(new Criteria(Filters.none(), Order.none())).subList(0, total);
         for (int i = 0; i < total; i++) {
             var action = ActionMother.random();
-            entities.add(ActionMother.create(action.id(), action.name(), modules.get(i).id()));
+            entities.add(ActionMother.create(action.id(), action.method(), modules.get(i).id()));
         }
         return entities;
     }

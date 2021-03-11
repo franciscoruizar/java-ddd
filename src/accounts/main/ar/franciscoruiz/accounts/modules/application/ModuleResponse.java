@@ -15,7 +15,7 @@ public final class ModuleResponse implements Response {
     public static ModuleResponse fromAggregate(Module module) {
         return new ModuleResponse(
             module.id().value(),
-            module.endpoint().value()
+            module.name().value()
         );
     }
 

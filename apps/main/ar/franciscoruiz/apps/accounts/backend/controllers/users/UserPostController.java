@@ -1,6 +1,5 @@
 package ar.franciscoruiz.apps.accounts.backend.controllers.users;
 
-import ar.franciscoruiz.accounts.roles.domain.Role;
 import ar.franciscoruiz.accounts.users.application.registration.RegistrationUserCommand;
 import ar.franciscoruiz.apps.accounts.backend.controllers.users.dto.UserRequest;
 import ar.franciscoruiz.apps.shared.ApiController;
@@ -31,7 +30,7 @@ public final class UserPostController extends ApiController {
             request.password(),
             request.profilePhotoUrl(),
             request.phone(),
-            Role.valueOf(request.role()).value().value()
+            request.roleId()
         ));
 
         return new ResponseEntity<>(HttpStatus.CREATED);

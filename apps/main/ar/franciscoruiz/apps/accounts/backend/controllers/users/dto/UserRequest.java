@@ -13,7 +13,7 @@ public class UserRequest {
     private String password;
     private String profilePhotoUrl;
     private String phone;
-    private String role;
+    private String roleId;
 
     public String id() {
         return id;
@@ -79,11 +79,11 @@ public class UserRequest {
         this.phone = phone;
     }
 
-    public String role() {
-        return role;
+    public String roleId() {
+        return roleId;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
     }
 }

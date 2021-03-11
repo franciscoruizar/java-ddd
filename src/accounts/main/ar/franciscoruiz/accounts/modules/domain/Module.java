@@ -3,25 +3,25 @@ package ar.franciscoruiz.accounts.modules.domain;
 import java.util.Objects;
 
 public final class Module {
-    private final ModuleId       id;
-    private final ModuleEndpoint endpoint;
+    private final ModuleId   id;
+    private final ModuleName name;
 
     public Module() {
-        this.id       = null;
-        this.endpoint = null;
+        this.id   = null;
+        this.name = null;
     }
 
-    public Module(ModuleId id, ModuleEndpoint endpoint) {
-        this.id       = id;
-        this.endpoint = endpoint;
+    public Module(ModuleId id, ModuleName name) {
+        this.id   = id;
+        this.name = name;
     }
 
     public ModuleId id() {
         return id;
     }
 
-    public ModuleEndpoint endpoint() {
-        return endpoint;
+    public ModuleName name() {
+        return name;
     }
 
     @Override
@@ -29,11 +29,11 @@ public final class Module {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Module module = (Module) o;
-        return Objects.equals(id, module.id) && Objects.equals(endpoint, module.endpoint);
+        return Objects.equals(id, module.id) && Objects.equals(name, module.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, endpoint);
+        return Objects.hash(id, name);
     }
 }

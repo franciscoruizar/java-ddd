@@ -9,8 +9,8 @@
             <key-property column="id" name="value" length="36" access="field"/>
         </composite-id>
 
-        <component name="endpoint" class="ar.franciscoruiz.accounts.modules.domain.ModuleEndpoint" access="field">
-            <property name="value" column="endpoint" type="java.lang.String" access="field"/>
+        <component name="name" class="ar.franciscoruiz.accounts.modules.domain.ModuleName" access="field">
+            <property name="value" column="name" type="java.lang.String" access="field"/>
         </component>
     </class>
 </hibernate-mapping>

@@ -1,6 +1,7 @@
 package ar.franciscoruiz.apps.accounts.backend.controllers.roles;
 
-import ar.franciscoruiz.accounts.roles.domain.Role;
+import ar.franciscoruiz.accounts.roles.application.RolesResponse;
+import ar.franciscoruiz.accounts.roles.application.search_all.SearchAllRolesQuery;
 import ar.franciscoruiz.apps.shared.ApiController;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,9 +25,8 @@ public final class RolesGetController extends ApiController {
     @GetMapping("/api/roles")
     public List<HashMap<String, Object>> index() throws QueryHandlerExecutionError {
 
-        return Arrays.stream(Role.values()).map(role -> new HashMap<String, Object>() {{
-            put("id", role.value().value());
-            put("name", role.name());
-        }}).collect(Collectors.toList());
+        RolesResponse responses = ask(new SearchAllRolesQuery());
+
+        return responses.values().stream().map(this::encode).collect(Collectors.toList());
     }
 }

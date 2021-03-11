@@ -1,36 +1,40 @@
 package ar.franciscoruiz.accounts.roles.domain;
 
-import ar.franciscoruiz.shared.domain.DomainError;
+import java.util.Objects;
 
-public enum Role {
-    ADMIN("f7030ab4-d20f-469b-8ee4-a1c5e27bee36"),
-    USER("3f321312-4efd-4e8d-a4fe-ba2d9fe9ed84");
+public final class Role {
+    private final RoleId   id;
+    private final RoleName name;
 
-    private final String value;
-
-    Role(String value) {
-        this.value = value;
+    public Role(RoleId id, RoleName name) {
+        this.id   = id;
+        this.name = name;
     }
 
-    public static String valueOf(RoleId roleId) {
-        for (var item : Role.values()) {
-            if (item.value().equals(roleId))
-                return item.name();
-        }
-
-        throw new DomainError("role_not_exists", String.format("the role <%s> not exists", roleId.value()));
+    private Role() {
+        //Only for Hibernate
+        this.id   = null;
+        this.name = null;
     }
 
-    public static Role find(RoleId roleId) {
-        for (var item : Role.values()) {
-            if (item.value().equals(roleId))
-                return item;
-        }
-
-        throw new DomainError("role_not_exists", String.format("the role <%s> not exists", roleId.value()));
+    public RoleId id() {
+        return id;
     }
 
-    public RoleId value() {
-        return new RoleId(value);
+    public RoleName name() {
+        return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Role role = (Role) o;
+        return Objects.equals(id, role.id) && Objects.equals(name, role.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 }

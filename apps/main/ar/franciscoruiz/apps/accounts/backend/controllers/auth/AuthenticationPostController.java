@@ -1,6 +1,6 @@
 package ar.franciscoruiz.apps.accounts.backend.controllers.auth;
 
-import ar.franciscoruiz.accounts.auth.application.authenticate.AuthenticateUserCommand;
+import ar.franciscoruiz.accounts.authentications.application.authenticate.AuthenticateUserCommand;
 import ar.franciscoruiz.accounts.users.application.UserResponse;
 import ar.franciscoruiz.accounts.users.application.find_by_username.FindUserByUsernameQuery;
 import ar.franciscoruiz.apps.shared.ApiController;

@@ -1,9 +1,7 @@
 package ar.franciscoruiz.apps.shared.middlewares;
 
-import ar.franciscoruiz.accounts.role_actions.application.RoleActionsResponse;
-import ar.franciscoruiz.accounts.role_actions.application.search_by_role.SearchActionsByRoleIdQuery;
-import ar.franciscoruiz.accounts.roles.domain.Role;
-import ar.franciscoruiz.accounts.roles.domain.RoleId;
+import ar.franciscoruiz.accounts.authorizations.application.AuthorizationsResponse;
+import ar.franciscoruiz.accounts.authorizations.application.search_by_role.SearchAuthorizationsByRoleIdQuery;
 import ar.franciscoruiz.accounts.users.application.UserResponse;
 import ar.franciscoruiz.accounts.users.application.find_by_username.FindUserByUsernameQuery;
 import ar.franciscoruiz.accounts.users.domain.UserNotExist;
@@ -67,16 +65,12 @@ public final class JwtAuthMiddleware implements Filter {
     ) throws IOException, ServletException {
         UserResponse user = bus.ask(new FindUserByUsernameQuery(username));
 
-        if (jwtUtil.validate(token, user)) {
-            if (isAuthorization(request, Role.valueOf(user.role()).value())) {
-                request.setAttribute("authentication_id", user.id());
-                request.setAttribute("authentication_username", user.username());
-                request.setAttribute("authentication_role", user.role());
+        if (jwtUtil.validate(token, user) && isAuthorization(request, user.roleId())) {
+            request.setAttribute("authentication_id", user.id());
+            request.setAttribute("authentication_username", user.username());
+            request.setAttribute("authentication_role", user.roleId());
 
-                chain.doFilter(request, response);
-            } else {
-                setInvalidToken(response);
-            }
+            chain.doFilter(request, response);
         } else {
             setInvalidToken(response);
         }
@@ -94,15 +88,15 @@ public final class JwtAuthMiddleware implements Filter {
         return null != authorizationHeader && authorizationHeader.startsWith("Bearer");
     }
 
-    private boolean isAuthorization(ServletRequest request, RoleId roleId) {
-        String uri      = uri(request);
-        String method   = methodHttp(request);
-        String endpoint = uri.replace("/api", "");
+    private boolean isAuthorization(ServletRequest request, String roleId) {
+        String uri    = uri(request);
+        String method = methodHttp(request);
+        String module = uri.replace("/api", "").replace("/", "");
 
-        RoleActionsResponse responses = bus.ask(new SearchActionsByRoleIdQuery(roleId.value()));
+        AuthorizationsResponse responses = bus.ask(new SearchAuthorizationsByRoleIdQuery(roleId));
 
         return responses.values().stream().anyMatch(response ->
-            response.methods().contains(method) && response.endpoint().equals(endpoint)
+            response.methods().contains(method) && response.module().equals(module)
         );
     }
 

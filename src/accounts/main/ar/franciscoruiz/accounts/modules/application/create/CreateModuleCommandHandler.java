@@ -1,7 +1,7 @@
 package ar.franciscoruiz.accounts.modules.application.create;
 
-import ar.franciscoruiz.accounts.modules.domain.ModuleEndpoint;
 import ar.franciscoruiz.accounts.modules.domain.ModuleId;
+import ar.franciscoruiz.accounts.modules.domain.ModuleName;
 import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.bus.command.CommandHandler;
 
@@ -15,8 +15,8 @@ public final class CreateModuleCommandHandler implements CommandHandler<CreateMo
 
     @Override
     public void handle(CreateModuleCommand command) {
-        ModuleId       id   = new ModuleId(command.id());
-        ModuleEndpoint name = new ModuleEndpoint(command.endpoint());
+        ModuleId   id   = new ModuleId(command.id());
+        ModuleName name = new ModuleName(command.endpoint());
 
         this.creator.create(id, name);
     }

@@ -18,7 +18,7 @@ final class ActionCreatorShould extends ActionsModuleUnitTestCase {
 
         mockModuleRepositoryFindById(ModuleMother.create(action.moduleId(), ModuleNameMother.random()));
 
-        creator.create(action.id(), action.name(), action.moduleId());
+        creator.create(action.id(), action.method(), action.moduleId());
 
         shouldSave(action);
         shouldHaveSaved(action);
@@ -31,7 +31,7 @@ final class ActionCreatorShould extends ActionsModuleUnitTestCase {
         Action action = ActionMother.random();
 
         Assertions.assertThrows(ModuleNotExist.class, () -> {
-            creator.create(action.id(), action.name(), action.moduleId());
+            creator.create(action.id(), action.method(), action.moduleId());
 
             shouldSave(action);
             shouldHaveSaved(action);

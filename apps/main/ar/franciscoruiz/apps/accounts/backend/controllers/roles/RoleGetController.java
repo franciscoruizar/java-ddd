@@ -1,7 +1,7 @@
 package ar.franciscoruiz.apps.accounts.backend.controllers.roles;
 
-import ar.franciscoruiz.accounts.roles.domain.Role;
-import ar.franciscoruiz.accounts.roles.domain.RoleId;
+import ar.franciscoruiz.accounts.roles.application.RoleResponse;
+import ar.franciscoruiz.accounts.roles.application.find.FindRoleQuery;
 import ar.franciscoruiz.apps.shared.ApiController;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
@@ -21,8 +21,8 @@ public final class RoleGetController extends ApiController {
 
     @GetMapping(value = "/api/roles/{id}")
     public ResponseEntity<HashMap<String, Object>> index(@PathVariable String id) throws QueryHandlerExecutionError {
-        Role role = Role.find(new RoleId(id));
+        RoleResponse response = ask(new FindRoleQuery(id));
 
-        return ResponseEntity.ok().body(encode(role));
+        return ResponseEntity.ok().body(encode(response));
     }
 }

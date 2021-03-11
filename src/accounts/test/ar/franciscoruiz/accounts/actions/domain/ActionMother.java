@@ -9,6 +9,6 @@ public final class ActionMother {
     }
 
     public static Action random() {
-        return create(ActionIdMother.random(), ActionNameMother.random(), ModuleIdMother.random());
+        return create(ActionIdMother.random(), ActionMethodMother.random(), ModuleIdMother.random());
     }
 }

@@ -20,10 +20,9 @@ public final class HealthCheckGetController extends ApiController {
 
     @GetMapping("/api/health-check")
     public HashMap<String, Serializable> index() {
-        HashMap<String, Serializable> status = new HashMap<>();
-        status.put("application", "accounts_backend");
-        status.put("status", "ok");
-
-        return status;
+        return new HashMap<>() {{
+            put("application", "accounts_backend");
+            put("status", "ok");
+        }};
     }
 }

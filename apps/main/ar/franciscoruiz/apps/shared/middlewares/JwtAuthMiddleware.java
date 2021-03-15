@@ -6,6 +6,7 @@ import ar.franciscoruiz.accounts.users.application.UserResponse;
 import ar.franciscoruiz.accounts.users.application.find_by_username.FindUserByUsernameQuery;
 import ar.franciscoruiz.accounts.users.domain.UserNotExist;
 import ar.franciscoruiz.apps.shared.utils.JwtUtil;
+import ar.franciscoruiz.shared.domain.applications.Application;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
 
 import javax.servlet.*;
@@ -45,7 +46,7 @@ public final class JwtAuthMiddleware implements Filter {
         String token    = authorizationHeader.substring(7);
         String username = jwtUtil.extractUsername(token);
 
-        if (username == null) {
+        if (username == null || !ensureApplication(token)) {
             setInvalidToken(response);
         } else {
             try {
@@ -54,6 +55,15 @@ public final class JwtAuthMiddleware implements Filter {
                 setInvalidToken(response);
             }
         }
+    }
+
+    private boolean ensureApplication(String token) {
+        String applicationValue = jwtUtil.extractApplication(token);
+
+        if (applicationValue == null)
+            return false;
+
+        return Application.findByValue(applicationValue).isPresent();
     }
 
     private void authorize(

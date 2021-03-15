@@ -34,14 +34,15 @@ public final class UserUpdater {
     }
 
     private User validateUserFields(User user, UserId id, UserName name, UserLastname lastname, UserUsername username, UserEmail email, UserProfilePhotoUrl profilePhotoUrl, UserPhone phone, RoleId roleId) {
-        UserId              idUpdated              = !id.equals(user.id()) ? id : user.id();
-        UserName            nameUpdated            = !name.equals(user.name()) ? name : user.name();
-        UserLastname        lastnameUpdated        = !lastname.equals(user.lastname()) ? lastname : user.lastname();
-        UserUsername        usernameUpdated        = !username.equals(user.username()) ? username : user.username();
-        UserEmail           emailUpdated           = !email.equals(user.email()) ? email : user.email();
-        UserProfilePhotoUrl profilePhotoUrlUpdated = !profilePhotoUrl.equals(user.profilePhotoUrl()) ? profilePhotoUrl : user.profilePhotoUrl();
-        UserPhone           phoneUpdated           = !phone.equals(user.phone()) ? phone : user.phone();
-        RoleId              roleIdUpdated          = !roleId.equals(user.roleId()) ? roleId : user.roleId();
+        UserId       idUpdated       = !id.equals(user.id()) ? id : user.id();
+        UserName     nameUpdated     = !name.equals(user.name()) ? name : user.name();
+        UserLastname lastnameUpdated = !lastname.equals(user.lastname()) ? lastname : user.lastname();
+        UserUsername usernameUpdated = !username.equals(user.username()) ? username : user.username();
+        UserEmail    emailUpdated    = !email.equals(user.email()) ? email : user.email();
+        UserProfilePhotoUrl profilePhotoUrlUpdated =
+            !profilePhotoUrl.equals(user.profilePhotoUrl()) ? profilePhotoUrl : user.profilePhotoUrl();
+        UserPhone phoneUpdated  = !phone.equals(user.phone()) ? phone : user.phone();
+        RoleId    roleIdUpdated = !roleId.equals(user.roleId()) ? roleId : user.roleId();
 
         return new User(
             idUpdated,

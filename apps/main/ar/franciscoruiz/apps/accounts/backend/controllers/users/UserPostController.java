@@ -17,7 +17,7 @@ public final class UserPostController extends ApiController {
         super(queryBus, commandBus);
     }
 
-    @PostMapping("/api/users")
+    @PostMapping("/api/signup")
     public ResponseEntity<String> index(
         @RequestBody UserRequest request
     ) {

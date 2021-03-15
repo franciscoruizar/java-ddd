@@ -41,7 +41,7 @@ final class HibernateUserRepositoryShould extends UsersModuleInfrastructureTestC
         int        total    = random.nextInt(5);
         List<User> entities = new ArrayList<>();
         for (int i = 0; i < total; i++)
-             entities.add(UserMother.random());
+            entities.add(UserMother.random());
 
         return entities;
     }

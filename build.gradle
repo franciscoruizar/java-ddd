@@ -150,6 +150,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
     implementation project(":accounts")
+    implementation project(":accounts")
     implementation project(":shared")
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

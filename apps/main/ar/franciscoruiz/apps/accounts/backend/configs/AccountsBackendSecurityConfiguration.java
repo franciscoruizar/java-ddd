@@ -22,7 +22,7 @@ public class AccountsBackendSecurityConfiguration {
         FilterRegistrationBean<JwtAuthMiddleware> registrationBean = new FilterRegistrationBean<>();
 
         registrationBean.setFilter(new JwtAuthMiddleware(jwtUtil, bus));
-        registrationBean.addUrlPatterns("/api/actions", "/api/modules", "/api/actions", "/api/roles/*", "/api/users");
+        registrationBean.addUrlPatterns("/api/actions", "/api/modules", "/api/actions", "/api/roles", "/api/users");
         return registrationBean;
     }
 }

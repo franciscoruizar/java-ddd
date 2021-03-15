@@ -42,7 +42,7 @@ final class HibernateModuleRepositoryShould extends ModulesModuleInfrastructureT
         int          total    = random.nextInt(5);
         List<Module> entities = new ArrayList<>();
         for (int i = 0; i < total; i++)
-             entities.add(ModuleMother.random());
+            entities.add(ModuleMother.random());
 
         return entities;
     }

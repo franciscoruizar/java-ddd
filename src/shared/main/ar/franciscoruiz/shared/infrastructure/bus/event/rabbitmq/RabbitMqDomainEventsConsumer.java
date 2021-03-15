@@ -59,8 +59,8 @@ public final class RabbitMqDomainEventsConsumer {
         String queue = message.getMessageProperties().getConsumerQueue();
 
         Object subscriber = domainEventSubscribers.containsKey(queue)
-            ? domainEventSubscribers.get(queue)
-            : subscriberFor(queue);
+                            ? domainEventSubscribers.get(queue)
+                            : subscriberFor(queue);
 
         Method subscriberOnMethod = subscriber.getClass().getMethod("on", domainEvent.getClass());
 

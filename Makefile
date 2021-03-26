@@ -18,3 +18,6 @@ build-jar:
 # Start the app
 start-accounts_backend:
 	@./gradlew :run --args='accounts_backend server'
+
+start-gateway_backend:
+	@./gradlew :run --args='gateway_backend server'

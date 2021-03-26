@@ -17,7 +17,7 @@ allprojects {
     }
 
     ext {
-        set('springCloudVersion', "Hoxton.M3")
+        set('springCloudVersion', "2020.0.2")
     }
 
     dependencies {
@@ -38,6 +38,7 @@ allprojects {
         implementation 'org.springframework:spring-context-support:5.3.4'
         implementation 'org.springframework.boot:spring-boot-starter-amqp'
         implementation 'org.springframework.boot:spring-boot-starter-mail'
+        implementation 'org.springframework.cloud:spring-cloud-starter-netflix-zuul:2.2.7.RELEASE'
 
         //Others
         implementation 'com.google.guava:guava:30.1-jre'
@@ -54,6 +55,12 @@ allprojects {
         testImplementation 'org.mockito:mockito-core:3.7.0'
         testImplementation 'com.github.javafaker:javafaker:1.0.2'
         testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
     }
 
     test {

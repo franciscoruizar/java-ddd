@@ -4,6 +4,8 @@ import ar.franciscoruiz.accounts.users.application.UserResponse;
 import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.Utils;
 import ar.franciscoruiz.shared.domain.applications.Application;
+import ar.franciscoruiz.shared.domain.config.Parameter;
+import ar.franciscoruiz.shared.domain.config.ParameterNotExist;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -13,14 +15,18 @@ import java.util.HashMap;
 
 @Service
 public final class JwtUtil {
-    private static final String KEY = "w0dx";
+    private final String key;
+
+    public JwtUtil(Parameter parameter) throws ParameterNotExist {
+        this.key = parameter.get("JWT_KEY");
+    }
 
     public String generateToken(UserResponse user, Application application) {
         return Jwts.builder()
             .setClaims(parseClaims(user, application))
             .setIssuedAt(new Date())
             .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
-            .signWith(SignatureAlgorithm.HS256, KEY).compact();
+            .signWith(SignatureAlgorithm.HS256, key).compact();
     }
 
     public boolean isTokenExpired(String token) {
@@ -32,7 +38,7 @@ public final class JwtUtil {
     }
 
     private Claims claims(String token) {
-        return Jwts.parser().setSigningKey(KEY).parseClaimsJws(token).getBody();
+        return Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody();
     }
 
     public String extractUsername(String token) {

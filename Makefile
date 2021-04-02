@@ -12,13 +12,16 @@ run-tests:
 	@./gradlew test --warning-mode all
 
 test:
-	@docker exec codelytv-ddd_skeleton-java ./gradlew test --warning-mode all
+	@docker exec java_ddd_skeleton-app ./gradlew test --warning-mode all
 
 run:
 	@./gradlew :run
 
+build-jar:
+	@./gradlew :bootJar
+
 ping-mysql:
-	@docker exec codelytv-java_ddd_skeleton-mysql mysqladmin --user=root --password= --host "127.0.0.1" ping --silent
+	@docker exec codelytv-java_ddd_template-mysql mysqladmin --user=root --password= --host "127.0.0.1" ping --silent
 
 # Start the app
 start-accounts_backend:

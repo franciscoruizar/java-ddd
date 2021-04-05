@@ -37,9 +37,9 @@ public class DomainEventsHibernateConfiguration {
         return factory.dataSource(
             config.get("DOMAIN-EVENTS_DATABASE_HOST"),
             config.getInt("DOMAIN-EVENTS_DATABASE_PORT"),
-            config.get("DOMAIN-EVENTS_DATABASE_NAME"),
-            config.get("DOMAIN-EVENTS_DATABASE_USER"),
-            config.get("DOMAIN-EVENTS_DATABASE_PASSWORD")
+            config.get("DOMAIN_EVENTS_DATABASE_NAME"),
+            config.get("DOMAIN_EVENTS_DATABASE_USER"),
+            config.get("DOMAIN_EVENTS_DATABASE_PASSWORD")
         );
     }
 }

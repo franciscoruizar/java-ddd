@@ -1,7 +1,6 @@
 package ar.franciscoruiz.apps;
 
 import ar.franciscoruiz.apps.accounts.backend.AccountsBackendApplication;
-import ar.franciscoruiz.apps.gateway.backend.GatewayBackendApplication;
 import ar.franciscoruiz.shared.infrastructure.cli.ConsoleCommand;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
@@ -66,7 +65,6 @@ public class Starter {
     private static HashMap<String, Class<?>> applications() {
         HashMap<String, Class<?>> applications = new HashMap<>();
 
-        applications.put("gateway_backend", GatewayBackendApplication.class);
         applications.put("accounts_backend", AccountsBackendApplication.class);
 
         return applications;
@@ -75,7 +73,6 @@ public class Starter {
     private static HashMap<String, HashMap<String, Class<?>>> commands() {
         HashMap<String, HashMap<String, Class<?>>> commands = new HashMap<>();
 
-        commands.put("gateway_backend", GatewayBackendApplication.commands());
         commands.put("accounts_backend", AccountsBackendApplication.commands());
 
         return commands;

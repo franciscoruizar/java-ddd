@@ -1,11 +1,13 @@
 package ar.franciscoruiz.accounts.users.domain;
 
 import ar.franciscoruiz.accounts.roles.domain.RoleId;
+import ar.franciscoruiz.shared.domain.AggregateRoot;
+import ar.franciscoruiz.shared.domain.users.UserCreatedDomainEvent;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public final class User {
+public final class User extends AggregateRoot {
     private final UserId              id;
     private final UserName            name;
     private final UserLastname        lastname;
@@ -60,6 +62,46 @@ public final class User {
         this.createdDate     = null;
         this.updatedDate     = null;
         this.deletedDate     = null;
+    }
+
+    public static User create(
+        UserId id,
+        UserName name,
+        UserLastname lastname,
+        UserUsername username,
+        UserEmail email,
+        UserPassword password,
+        UserProfilePhotoUrl profilePhotoUrl,
+        UserPhone phone,
+        RoleId roleId,
+        LocalDateTime createdDate,
+        LocalDateTime updatedDate,
+        LocalDateTime deletedDate
+    ) {
+        User user = new User(
+            id,
+            name,
+            lastname,
+            username,
+            email,
+            password,
+            profilePhotoUrl,
+            phone,
+            roleId,
+            createdDate,
+            updatedDate,
+            deletedDate
+        );
+
+        user.record(new UserCreatedDomainEvent(
+            id.value(),
+            name.value(),
+            lastname.value(),
+            username.value(),
+            email.value()
+        ));
+
+        return user;
     }
 
     public UserId id() {

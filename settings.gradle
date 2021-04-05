@@ -3,8 +3,8 @@ rootProject.name = 'java-ddd-template'
 include ':accounts'
 project(':accounts').projectDir = new File('src/accounts')
 
-include ':analytics'
-project(':analytics').projectDir = new File('src/analytics')
+include ':retentions'
+project(':retentions').projectDir = new File('src/retentions')
 
 include ':shared'
 project(':shared').projectDir = new File('src/shared')

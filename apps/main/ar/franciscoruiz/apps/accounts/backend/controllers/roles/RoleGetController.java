@@ -19,7 +19,7 @@ public final class RoleGetController extends ApiController {
         super(queryBus, commandBus);
     }
 
-    @GetMapping(value = "/api/roles/{id}")
+    @GetMapping(value = "/roles/{id}")
     public ResponseEntity<HashMap<String, Object>> index(@PathVariable String id) throws QueryHandlerExecutionError {
         RoleResponse response = ask(new FindRoleQuery(id));
 

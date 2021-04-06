@@ -19,7 +19,7 @@ public final class UserGetController extends ApiController {
         super(queryBus, commandBus);
     }
 
-    @GetMapping(value = "/api/users/{id}")
+    @GetMapping(value = "/users/{id}")
     public ResponseEntity<HashMap<String, Object>> index(@PathVariable String id) throws QueryHandlerExecutionError {
         UserResponse user = ask(new FindUserQuery(id));
 

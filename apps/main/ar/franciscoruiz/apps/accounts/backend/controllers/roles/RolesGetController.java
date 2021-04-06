@@ -22,7 +22,7 @@ public final class RolesGetController extends ApiController {
         super(queryBus, commandBus);
     }
 
-    @GetMapping("/api/roles")
+    @GetMapping("/roles")
     public List<HashMap<String, Object>> index() throws QueryHandlerExecutionError {
 
         RolesResponse responses = ask(new SearchAllRolesQuery());

@@ -19,7 +19,7 @@ public final class ActionGetController extends ApiController {
         super(queryBus, commandBus);
     }
 
-    @GetMapping(value = "/api/actions/{id}")
+    @GetMapping(value = "/actions/{id}")
     public ResponseEntity<HashMap<String, Object>> index(@PathVariable String id) throws QueryHandlerExecutionError {
         ActionResponse action = ask(new FindActionQuery(id));
 

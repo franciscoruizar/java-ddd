@@ -20,7 +20,7 @@ public final class AuthorizationsGetController extends ApiController {
         super(queryBus, commandBus);
     }
 
-    @GetMapping(value = "/api/authorizations", params = {"role_id"})
+    @GetMapping(value = "/authorizations", params = {"role_id"})
     public List<HashMap<String, Object>> index(@RequestParam(name = "role_id") String roleId) throws QueryHandlerExecutionError {
         AuthorizationsResponse response = ask(new SearchAuthorizationsByRoleIdQuery(roleId));
 

@@ -21,7 +21,7 @@ public final class UsersGetController extends ApiController {
         super(queryBus, commandBus);
     }
 
-    @GetMapping("/api/users")
+    @GetMapping("/users")
     public List<HashMap<String, Object>> index(@RequestParam HashMap<String, Serializable> params) throws QueryHandlerExecutionError {
         UsersResponse users = ask(
             new SearchUsersByCriteriaQuery(

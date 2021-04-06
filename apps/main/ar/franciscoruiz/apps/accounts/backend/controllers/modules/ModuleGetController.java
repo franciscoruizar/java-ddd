@@ -19,7 +19,7 @@ public final class ModuleGetController extends ApiController {
         super(queryBus, commandBus);
     }
 
-    @GetMapping(value = "/api/modules/{id}")
+    @GetMapping(value = "/modules/{id}")
     public ResponseEntity<HashMap<String, Object>> index(@PathVariable String id) throws QueryHandlerExecutionError {
         ModuleResponse module = ask(new FindModuleQuery(id));
 

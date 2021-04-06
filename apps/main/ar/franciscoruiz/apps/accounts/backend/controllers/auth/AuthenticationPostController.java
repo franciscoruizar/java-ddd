@@ -28,7 +28,7 @@ public final class AuthenticationPostController extends ApiController {
         this.jwtUtil = jwtUtil;
     }
 
-    @PostMapping(value = "/api/auth")
+    @PostMapping(value = "/auth")
     public HashMap<String, Serializable> index(
         @RequestBody Request request,
         @RequestHeader("Application") String applicationValue

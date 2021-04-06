@@ -17,7 +17,7 @@ public final class ModulePutController extends ApiController {
         super(queryBus, commandBus);
     }
 
-    @PutMapping("/api/modules/{id}")
+    @PutMapping("/modules/{id}")
     public ResponseEntity<String> index(@PathVariable String id, @RequestBody Request request) {
         this.dispatch(new CreateModuleCommand(id, request.endpoint()));
 

@@ -18,7 +18,7 @@ public final class AuthorizationPutController extends ApiController {
         super(queryBus, commandBus);
     }
 
-    @PostMapping("/api/authorizations")
+    @PostMapping("/authorizations")
     public ResponseEntity<String> index(
         @RequestParam Request request
     ) {

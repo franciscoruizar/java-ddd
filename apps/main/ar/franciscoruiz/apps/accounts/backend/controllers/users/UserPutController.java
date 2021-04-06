@@ -18,7 +18,7 @@ public final class UserPutController extends ApiController {
         super(queryBus, commandBus);
     }
 
-    @PutMapping("/api/users/{id}")
+    @PutMapping("/users/{id}")
     public ResponseEntity<String> index(
         @RequestParam String id,
         @RequestBody UserRequest request

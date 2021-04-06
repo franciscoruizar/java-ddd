@@ -21,7 +21,7 @@ public final class ModulesGetController extends ApiController {
         super(queryBus, commandBus);
     }
 
-    @GetMapping("/api/modules")
+    @GetMapping("/modules")
     public List<HashMap<String, Object>> index(@RequestParam HashMap<String, Serializable> params) throws QueryHandlerExecutionError {
         ModulesResponse modules = ask(
             new SearchModulesByCriteriaQuery(

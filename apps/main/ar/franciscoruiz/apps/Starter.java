@@ -1,6 +1,7 @@
 package ar.franciscoruiz.apps;
 
 import ar.franciscoruiz.apps.accounts.backend.AccountsBackendApplication;
+import ar.franciscoruiz.apps.retentions.RetentionsApplication;
 import ar.franciscoruiz.shared.infrastructure.cli.ConsoleCommand;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
@@ -66,6 +67,7 @@ public class Starter {
         HashMap<String, Class<?>> applications = new HashMap<>();
 
         applications.put("accounts_backend", AccountsBackendApplication.class);
+        applications.put("retentions", RetentionsApplication.class);
 
         return applications;
     }
@@ -74,6 +76,7 @@ public class Starter {
         HashMap<String, HashMap<String, Class<?>>> commands = new HashMap<>();
 
         commands.put("accounts_backend", AccountsBackendApplication.commands());
+        commands.put("retentions", RetentionsApplication.commands());
 
         return commands;
     }

@@ -22,7 +22,7 @@ public final class ActionsGetController extends ApiController {
         super(queryBus, commandBus);
     }
 
-    @GetMapping("/api/actions")
+    @GetMapping("/actions")
     public ResponseEntity<List<HashMap<String, Object>>> index(@RequestParam HashMap<String, Serializable> params) throws QueryHandlerExecutionError {
         ActionsResponse actions = ask(
             new SearchActionsByCriteriaQuery(

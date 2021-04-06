@@ -19,7 +19,7 @@ public final class ActionPutController extends ApiController {
         super(queryBus, commandBus);
     }
 
-    @PutMapping("/api/actions/{id}")
+    @PutMapping("/actions/{id}")
     public ResponseEntity<String> index(
         @RequestParam String id,
         @RequestBody Request request

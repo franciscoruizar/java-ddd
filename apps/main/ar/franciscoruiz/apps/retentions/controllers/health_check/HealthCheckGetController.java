@@ -1,4 +1,4 @@
-package ar.franciscoruiz.apps.accounts.backend.controllers.health_check;
+package ar.franciscoruiz.apps.retentions.controllers.health_check;
 
 import ar.franciscoruiz.apps.shared.ApiController;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
@@ -21,7 +21,7 @@ public final class HealthCheckGetController extends ApiController {
     @GetMapping("/health-check")
     public HashMap<String, Serializable> index() {
         return new HashMap<>() {{
-            put("application", "accounts_backend");
+            put("application", "retentions");
             put("status", "ok");
         }};
     }

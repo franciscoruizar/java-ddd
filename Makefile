@@ -1,18 +1,10 @@
 .PHONY: all build test ping-mysql
 
-all: build
-
-up:
-	@docker-compose up -d
-
-build:
-	@./gradlew build --warning-mode all
-
-run-tests:
-	@./gradlew test --warning-mode all
+all: build test
+build: build-jar up
 
 test:
-	@docker exec java_ddd_skeleton-app ./gradlew test --warning-mode all
+	@./gradlew test
 
 run:
 	@./gradlew :run
@@ -20,8 +12,11 @@ run:
 build-jar:
 	@./gradlew :bootJar
 
+up:
+	@docker-compose up -d
+
 ping-mysql:
-	@docker exec codelytv-java_ddd_template-mysql mysqladmin --user=root --password= --host "127.0.0.1" ping --silent
+	@docker exec codelytv-java_ddd_template-mysql mysqladmin --user=root --password=lechuga --host "127.0.0.1" ping --silent
 
 # Start the app
 start-accounts_backend:

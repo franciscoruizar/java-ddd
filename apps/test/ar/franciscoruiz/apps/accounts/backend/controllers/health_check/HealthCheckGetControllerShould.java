@@ -7,6 +7,6 @@ import org.junit.jupiter.api.Test;
 final class HealthCheckGetControllerShould extends AccountsApplicationTestCase {
     @Test
     void check_the_app_is_working_ok() throws Exception {
-        assertResponse("/api/health-check", 200, "{'application':'accounts_backend','status':'ok'}");
+        assertResponse("/health-check", 200, "{'application':'accounts_backend','status':'ok'}");
     }
 }

@@ -40,7 +40,7 @@ public final class SpringEmailService implements EmailService {
 
     @Override
     public void sendMessageUsingTemplate(String to, String subject, String... templateModel) {
-        String text = String.format(Objects.requireNonNull(template.getText()), templateModel);
+        String text = String.format(Objects.requireNonNull(template.getText()), templateModel.toString());
         sendMessage(to, subject, text);
     }
 

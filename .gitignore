@@ -8,9 +8,6 @@ gradle-app.setting
 /var/log/*
 !/var/log/.gitkeep
 
-.env.local
-.env.*.local
-/apps/main/resources/.env
 
 ### IntelliJ IDEA ###
 .idea

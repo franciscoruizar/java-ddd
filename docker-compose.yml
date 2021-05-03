@@ -41,3 +41,4 @@ services:
     tty: true
     depends_on:
       - mysql
+      - rabbitmq

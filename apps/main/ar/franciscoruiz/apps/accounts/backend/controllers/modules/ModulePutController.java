@@ -1,6 +1,7 @@
 package ar.franciscoruiz.apps.accounts.backend.controllers.modules;
 
 import ar.franciscoruiz.accounts.modules.application.create.CreateModuleCommand;
+import ar.franciscoruiz.apps.accounts.backend.controllers.modules.dto.ModuleRequest;
 import ar.franciscoruiz.apps.shared.ApiController;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
@@ -18,21 +19,9 @@ public final class ModulePutController extends ApiController {
     }
 
     @PutMapping("/modules/{id}")
-    public ResponseEntity<String> index(@PathVariable String id, @RequestBody Request request) {
+    public ResponseEntity<String> index(@PathVariable String id, @RequestBody ModuleRequest request) {
         this.dispatch(new CreateModuleCommand(id, request.endpoint()));
 
         return new ResponseEntity<>(HttpStatus.CREATED);
-    }
-
-    static class Request {
-        private String endpoint;
-
-        public String endpoint() {
-            return endpoint;
-        }
-
-        public void setModule(String endpoint) {
-            this.endpoint = endpoint;
-        }
     }
 }

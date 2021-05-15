@@ -2,7 +2,7 @@ version: '3'
 
 services:
   mysql:
-    container_name: java_ddd_template-database
+    container_name: mysql
     image: mysql:8
     ports:
       - 3306:3306
@@ -16,7 +16,7 @@ services:
     command: [ "--default-authentication-plugin=mysql_native_password" ]
 
   rabbitmq:
-    container_name: java_ddd_template-rabbitmq
+    container_name: rabbitmq
     image: 'rabbitmq:3.7-management'
     restart: unless-stopped
     ports:
@@ -27,7 +27,7 @@ services:
       - RABBITMQ_DEFAULT_PASS=lechuga
 
   java:
-    container_name: java_ddd_template-app
+    container_name: app
     build:
       context: .
       dockerfile: Dockerfile

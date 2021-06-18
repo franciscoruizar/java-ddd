@@ -1,4 +1,4 @@
-rootProject.name = 'java-ddd-template'
+rootProject.name = 'java-ddd'
 
 include ':accounts'
 project(':accounts').projectDir = new File('src/accounts')
